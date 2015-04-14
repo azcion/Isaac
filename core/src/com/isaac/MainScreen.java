@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -15,8 +16,17 @@ public class MainScreen implements Screen {
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private Stage stage;
+	private Sprite rock;
 	
 	int w, h;
+	
+	public float x (int row) {
+		return w / 9 + w / 9 * 7 / 13 * row;
+	}
+	
+	public float y (int col) {
+		return h / 6 + h / 6 * 4 / 7 * col;
+	}
 
 	
 	public MainScreen (MainGame game) {
@@ -46,7 +56,6 @@ public class MainScreen implements Screen {
 
 	@Override
 	public void render (float delta) {
-		//Gdx.gl30.glClearColor(0.5F, 0.5F, 0.5F, 0.5F);
 		Gdx.gl30.glClear(GL30.GL_COLOR_BUFFER_BIT);
 		
 		camera.update();
@@ -63,29 +72,23 @@ public class MainScreen implements Screen {
 			batch.draw(Assets.sBackFloor0, w/9, h/6*5, w/2-w/9, -(h/2-h/6));
 			batch.draw(Assets.sBackFloor1, w/9*8, h/6*5, -(w/2-w/9), -(h/2-h/6));
 			
-			//t, x, y, orX, orY, w, h,    scX, scY, rot, sX, sY, sW, sH, fX, fY
-			
-			for (int i = h/6; i < h/6*4; i += h/6*4/7) {
-				for (int j = w/9; j < w/9*7; j += w/9*7/13) {
-					if (Math.random() > 0.9) {
-						//batch.draw(Assets.sRockBasement0, 
-							//	i, j, i+h/6*4/7, j+w/9*7/13);
+			for (int i = 0; i < 7; ++i) {
+				for (int j = 0; j < 13; ++j) {
+					if (Assets.rockMap[i][j]) {
+						rock = (Assets.rockMapR[i][j] == 0) ? 
+								Assets.sRockBasement[0] :
+								(Assets.rockMapR[i][j] == 1) ? 
+								Assets.sRockBasement[1] :
+								(Assets.rockMapR[i][j] == 2) ?
+								Assets.sRockBasement[2] :
+								(Assets.rockMapR[i][j] == 3) ?
+								Assets.sRockBasement[3] :
+								Assets.sRockBasement[4];
+						batch.draw(rock, x(j), y(i), w/9*7/13, h/6*4/7);
 					}
 				}
-				System.out.println(i);
 			}
-			/*batch.draw(Assets.tDoorHole, 
-					w/2-64, 0,      w/2, 64,    128, 128, 
-					1, 1, 0,    0, 0, 64, 64, true, true);
-			batch.draw(Assets.tDoorHole, 
-					w/2-64, h-128,  540, 656,   128, 128, 
-					1, 1, 180,  0, 0, 64, 64, true, false);
-			batch.draw(Assets.tDoorHole, 
-					0, h/2-64,       64, 360,   128, 128, 
-					1, 1, 90,   0, 0, 64, 64, false, true);
-			batch.draw(Assets.tDoorHole, 
-					w-64, h/2-64,  1016, 360,   128, 128, 
-					1, 1, 270,  0, 0, 64, 64, false, false);*/
+			
 		batch.end();
 	}
 

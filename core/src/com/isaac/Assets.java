@@ -8,6 +8,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Assets {
 	
+	private static int w = Gdx.graphics.getWidth();
+	private static int h = Gdx.graphics.getHeight();
+	
 	public static Texture tBack;
 	public static Sprite sBack;
 	public static Sprite sBackFloor0;
@@ -16,16 +19,10 @@ public class Assets {
 	public static Texture tDoorHole;
 	public static Sprite sDoorHole;
 	
+	public static boolean[][] rockMap;
+	public static int[][] rockMapR;
 	public static Texture tRockBasement;
-	public static Sprite sRockBasement0;
-	/*public static Sprite sRockBasement1;
-	public static Sprite sRockBasement1;
-	public static Sprite sRockBasement1;
-	public static Sprite sRockBasement1;
-	public static Sprite sRockBasement1;
-	public static Sprite sRockBasement1;
-	public static Sprite sRockBasement1;
-	public static Sprite sRockBasement1;*/
+	public static Sprite[] sRockBasement;
 	
 	public static void load () {
 		tBack = new Texture(Gdx.files.internal("png/basement.png"));
@@ -40,8 +37,25 @@ public class Assets {
 		sDoorHole = new Sprite(tDoorHole);
 		
 		tRockBasement = new Texture(Gdx.files.internal("png/rocks_basement.png"));
-		sRockBasement0 = new Sprite(tRockBasement, 0, 0, 32, 32);
-		sRockBasement0.flip(false, true);
+		sRockBasement = new Sprite[9];
+		
+		for (int i = 0; i < 9; ++i) {
+			sRockBasement[i] = (i < 4) ? new Sprite(tRockBasement, i*32, 0, 32, 32)
+					: (i < 6) ? new Sprite(tRockBasement, i*32, 32, 32, 32)
+					: new Sprite(tRockBasement, i*32, 64, 32, 32);
+			sRockBasement[i].flip(false, true);
+		}
+		rockMap = new boolean[7][13];
+		rockMapR = new int[7][13];
+		
+		for (int i = 0; i < 7; ++i) {
+			for (int j = 0; j < 13; ++j) {
+				rockMap[i][j] = true;
+				rockMapR[i][j] = (Math.random() > 0.66) ? 3 : 
+						(Math.random() > 0.66) ? 1 :
+						(Math.random() > 0.66) ? 2 : 0;
+			}
+		}
 		
 	}
 }
