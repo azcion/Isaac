@@ -1,5 +1,7 @@
 package com.isaac;
 
+import java.io.IOException;
+
 import com.badlogic.gdx.Game;
 
 
@@ -9,7 +11,11 @@ public class MainGame extends Game {
 	
 	@Override
 	public void create () {
-		Assets.load();
+		try {
+			Assets.load();
+		} catch (IOException e) {
+
+		}
 		Screen = new MainScreen(this);
 		setScreen(Screen);
 	}

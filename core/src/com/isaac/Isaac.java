@@ -1,10 +1,12 @@
+package com.isaac;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
 
 
-public class Game {
+public class Isaac {
 	
 	
 	public static void main (String[] args) {
@@ -12,20 +14,6 @@ public class Game {
 		Character P = new Character (9, 23745261);
 		
 		System.out.print(P.toString());
-	}
-}
-
-class Seed {
-	
-	private Random r;
-	
-	public Seed (long seed) {
-		this.r = new Random();
-		this.r.setSeed(seed);
-	}
-	
-	public double next () {
-		return r.nextDouble();
 	}
 }
 
@@ -99,8 +87,8 @@ class Character {
 			this._Luck = __Luck[ch];
 			this._Carry = new Carry(__StartingPickups[ch], __StartingItem[ch]);
 		} else {
-			double p = R.next(); double q = R.next(); double r = R.next();
-			double s = R.next(); double t = R.next(); double u = R.next();
+			double p = R.nD(); double q = R.nD(); double r = R.nD();
+			double s = R.nD(); double t = R.nD(); double u = R.nD();
 			this._Damage = 3.5 * __Damage[ch] + p * 0.58 - 0.29;
 			this._Tears = (__Tears[ch] > 0) ?
 					16 - Math.sqrt(1 + (__Tears[ch] + q * 1.4 - 0.7) * 1.3) * 6 :
