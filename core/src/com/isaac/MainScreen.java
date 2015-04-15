@@ -15,28 +15,35 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.Stage;
+import static com.isaac.Vars.PM;
 
 
 public class MainScreen implements Screen {
 	
 	private MainGame game;
-	private OrthographicCamera camera;
+	private OrthographicCamera b2dcam;
 	private SpriteBatch batch;
 	private Sprite rock;
 	
 	private World world;
 	private Box2DDebugRenderer b2dr;
+	private Contact cont;
+	
+	Body walls;
+	Body ground;
+	Body player;
+	
 	
 	
 	int w, h;
 	
 	public float x (int row) {
+		// x coordinate of a row
 		return w / 9 + w / 9 * 7 / 13 * row;
 	}
 	
 	public float y (int col) {
+		// y coordinate of a column
 		return h / 6 + h / 6 * 4 / 7 * col;
 	}
 
@@ -47,56 +54,69 @@ public class MainScreen implements Screen {
 		w = Gdx.graphics.getWidth();
 		h = Gdx.graphics.getHeight();
 
-		world = new World(new Vector2(0, 0), true);
+		world = new World(new Vector2(0, 9.81f), true);
+		world.setContactListener(cont = new Contact());
 		b2dr = new Box2DDebugRenderer();
 		
-		
-		// create wall
-		BodyDef wall = new BodyDef();
-		wall.type = BodyType.StaticBody;
-		Body walls = world.createBody(wall);
+		// create walls
+		BodyDef bdef = new BodyDef();
 		FixtureDef fdef = new FixtureDef();
 		
 		PolygonShape rect = new PolygonShape();
-		
-		wall.position.set(w/9/2, h/2);
-		wall.position.set(w/2, h/2);
-		rect.setAsBox(w/9, h/6);
+		bdef.type = BodyType.StaticBody;
 		fdef.shape = rect;
-		walls.createFixture(fdef);
+		fdef.filter.categoryBits = Vars.bWALL;
+		fdef.filter.maskBits = Vars.bPLAYER;
+		fdef.isSensor = false;
 		
+		bdef.position.set(w/9/2/PM, h/2/PM);
+		walls = world.createBody(bdef);
+		rect.setAsBox(w/9/2/PM, h/2/PM);
+		walls.createFixture(fdef).setUserData("wL");
 		
-		/*
-		BodyDef wR = new BodyDef();
-		wR.type = BodyType.StaticBody;
-		wR.position.set(w/2, h/2);
-		Body bR = world.createBody(wR);
+		bdef.position.set(w/PM-w/9/2/PM, h/2/PM);
+		walls = world.createBody(bdef);
+		walls.createFixture(fdef).setUserData("wR");
 		
-		BodyDef wU = new BodyDef();
-		wU.type = BodyType.StaticBody;
-		wU.position.set(w/2, h/2);
-		Body bU = world.createBody(wU);
+		bdef.position.set(w/2/PM, h/6/2/PM);
+		walls = world.createBody(bdef);
+		rect.setAsBox(w/9*7/2/PM, h/6/2/PM);
+		walls.createFixture(fdef).setUserData("wU");
 		
-		BodyDef wD = new BodyDef();
-		wD.type = BodyType.StaticBody;
-		wD.position.set(w/2, h/2);
-		Body bD = world.createBody(wD);
+		bdef.position.set(w/2/PM, h/PM-h/6/2/PM);
+		walls = world.createBody(bdef);
+		walls.createFixture(fdef).setUserData("wD");
 		
-		/*
-		PolygonShape rect = new PolygonShape();
-		torso.setAsBox(100, 300);
+		// create ground
+		PolygonShape floor = new PolygonShape();
+		bdef.type = BodyType.StaticBody;
+		fdef.shape = floor;
+		fdef.filter.categoryBits = Vars.bGROUND;
+		fdef.isSensor = true;
 		
-		FixtureDef fdef = new FixtureDef();
-		fdef.shape = torso;
-		body.createFixture(fdef);
+		bdef.position.set(w/2/PM, h/2/PM);
+		ground = world.createBody(bdef);
+		floor.setAsBox(w/9*7/2/PM, h/6*4/2/PM);
+		ground.createFixture(fdef).setUserData("G");
 		
-		/*
+		// create player
 		CircleShape head = new CircleShape();
-		head.setRadius(w/9*7/13);
-		 */
+		bdef.type = BodyType.DynamicBody;
+		fdef.shape = head;
+		fdef.filter.categoryBits = Vars.bPLAYER;
+		fdef.filter.maskBits = Vars.bWALL | Vars.bROCK;
+		fdef.isSensor = false;
 		
-		camera = new OrthographicCamera();
-		camera.setToOrtho(true, w, h);
+		bdef.position.set(w/2/PM, h/2/PM);
+		player = world.createBody(bdef);
+		head.setRadius(w/9*7/13/2/PM);
+		player.createFixture(fdef).setUserData("P");
+		player.setGravityScale(0);
+		
+		
+		
+		b2dcam = new OrthographicCamera();
+		b2dcam.setToOrtho(true, w/PM, h/PM);
 		
 		batch = new SpriteBatch();
 		
@@ -114,7 +134,46 @@ public class MainScreen implements Screen {
 		
 	}
 	
+	public void handleInput () {
+		if (Controls.isDown(Controls.W)) {
+			player.applyForceToCenter(0, -20, true);
+		} else
+		if (Controls.isDown(Controls.A)) {
+			player.applyForceToCenter(-20, 0, true);
+		} else
+		if (Controls.isDown(Controls.S)) {
+			player.applyForceToCenter(0, 20, true);
+		} else
+		if (Controls.isDown(Controls.D)) {
+			player.applyForceToCenter(20, 0, true);
+		}
+	}
+	
+	public void drag () {
+		Vector2 d = new Vector2();
+		
+		d.set(12f, 0);
+		d.setAngle(player.getLinearVelocity().angle());
+		d.scl(-1);
+		player.applyForceToCenter(d, true);
+	}
+	
+	public void limitSpeed () {
+		Vector2 v = player.getLinearVelocity();
+		
+		if (Math.abs(v.x) > Vars.SPEED || Math.abs(v.y) > Vars.SPEED) {
+			player.applyForceToCenter(-v.x, -v.y, true);
+			System.out.println("here");
+		}
+	}
+	
 	public void update (float delta) {
+		
+		handleInput();
+		
+		drag();
+		limitSpeed();
+		
 		world.step(delta, 6, 2);
 	}
 
@@ -123,12 +182,14 @@ public class MainScreen implements Screen {
 		Gdx.gl30.glClearColor(0F, 0F, 0F, 1F);
 		Gdx.gl30.glClear(GL30.GL_COLOR_BUFFER_BIT);
 		
-		camera.update();
+		b2dcam.update();
+		Controls.update();
+		update(1/60f);
 		
-		batch.setProjectionMatrix(camera.combined);
-		b2dr.render(world, camera.combined);
+		batch.setProjectionMatrix(b2dcam.combined);
+		b2dr.render(world, b2dcam.combined);
 		
-		batch.begin();
+		batch.begin();/*
 			batch.draw(Assets.sBack, 0, 0, w/2, h/2);
 			batch.draw(Assets.sBack, w, 0, -w/2, h/2);
 			batch.draw(Assets.sBack, 0, h, w/2, -h/2);
@@ -151,7 +212,7 @@ public class MainScreen implements Screen {
 					}
 				}
 			}
-			
+			*/
 		batch.end();
 	}
 
