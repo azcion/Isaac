@@ -1,17 +1,19 @@
-package com.isaac;
+package com.isaac.main;
 
 import java.io.IOException;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.isaac.handlers.Input;
+import com.isaac.res.Assets;
 
 
 public class MainGame extends Game {
 	
 	public MainScreen Screen;
-	public static final int Vw = 320;
-	public static final int Vh = 240;
-	public static final int SCALE = 2;
+	public static final int Vw = 80;
+	public static final int Vh = 45;
+	public static final int SCALE = 16;
 	
 	@Override
 	public void create () {

@@ -1,4 +1,4 @@
-package com.isaac;
+package com.isaac.handlers;
 
 public class Controls {
 	

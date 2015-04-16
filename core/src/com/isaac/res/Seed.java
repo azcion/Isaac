@@ -1,4 +1,4 @@
-package com.isaac;
+package com.isaac.res;
 
 import java.util.Random;
 

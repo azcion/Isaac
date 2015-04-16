@@ -1,22 +1,17 @@
-package com.isaac;
+package com.isaac.res;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
+
 
 public class Assets {
 	
-	private static Seed r;
 	
-	private static int w = Gdx.graphics.getWidth();
-	private static int h = Gdx.graphics.getHeight();
 	
 	public static Texture tBack;
 	public static Sprite sBack, sBackFloor0, sBackFloor1;
@@ -29,13 +24,17 @@ public class Assets {
 	public static Texture tRockBasement;
 	public static Sprite[] sRock01;
 	
+	public static Texture tPlayer;
+	public static Sprite[] sPlayer;
+	
 	public static void load () throws IOException {
 		load(System.currentTimeMillis());
 	}
 	
 	public static void load (long seed) throws IOException {
-		r = new Seed(seed);
+		Vars.seed = new Seed(seed);
 		
+		// get backgrounds
 		tBack = new Texture(Gdx.files.internal("png/01_B.png"));
 		sBack = new Sprite(tBack, 0, 0, 234, 156);
 		sBackFloor0 = new Sprite(tBack, 52, 364, 182, 104);
@@ -44,9 +43,11 @@ public class Assets {
 		sBackFloor0.flip(false, true);
 		sBackFloor1.flip(false, true);
 		
+		// get doors
 		tDoorHole = new Texture(Gdx.files.internal("png/01_D_H.png"));
 		sDoorHole = new Sprite(tDoorHole);
 		
+		// get rocks
 		tRockBasement = new Texture(Gdx.files.internal("png/01_R.png"));
 		sRock01 = new Sprite[9];
 		
@@ -56,6 +57,15 @@ public class Assets {
 		}
 		sRock01[4] = new Sprite(tRockBasement, 64, 32, 32, 32);
 		sRock01[4].flip(false, true);
+		
+		// get players
+		tPlayer = new Texture(Gdx.files.internal("char/isaac.png"));
+		sPlayer = new Sprite[6];
+
+		for (int i = 0; i < 6; ++i) {
+			sPlayer[i] = new Sprite(tPlayer, i*32, 0, 32, 32);
+			sPlayer[i].flip(false, true);
+		}
 		
 		rockMap = new boolean[7][13];
 		rockMapS = new int[7][13];
@@ -103,11 +113,11 @@ public class Assets {
 					if (obstructed(i, j)) {
 						rockMap[i][j] = false;
 					}
-					switch (r.nI(4)) {
+					switch (Vars.seed.nI(4)) {
 						case 0: rockMapS[i][j] = 0; break;
 						case 1: rockMapS[i][j] = 1; break;
 						case 2: rockMapS[i][j] = 2; break;
-						case 3: rockMapS[i][j] = (r.nD() > 0.95) ? 4 : 3; break;
+						case 3: rockMapS[i][j] = (Vars.seed.nD() > 0.95) ? 4 : 3; break;
 					}
 				}
 			}
