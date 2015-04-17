@@ -6,6 +6,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -15,6 +17,7 @@ import com.isaac.entity.StaticEntity;
 import com.isaac.handlers.Contact;
 import com.isaac.handlers.Controls;
 import com.isaac.handlers.Movement;
+import com.isaac.res.Assets;
 
 import static com.isaac.res.Vars.PM;
 import static com.isaac.res.Vars.h;
@@ -25,7 +28,7 @@ import static com.isaac.res.Vars.y;
 
 public class MainScreen implements Screen {
 	
-	private MainGame game;
+	MainGame game;
 	
 	public static World world;
 	
@@ -34,7 +37,7 @@ public class MainScreen implements Screen {
 	public static OrthographicCamera cam;
 	public static Box2DDebugRenderer debugcam;
 	
-	private Contact cont;
+	Contact cont;
 	
 	
 	public MainScreen (MainGame game) {
@@ -82,15 +85,19 @@ public class MainScreen implements Screen {
 		
 		cam.update();
 		batch.setProjectionMatrix(cam.combined);
-		debugcam.render(world, cam.combined); ///////////////////////
+		
 		
 		batch.begin();
 			
-			//Skin.drawWalls();
-			//Skin.drawFloor();
-			//Skin.drawRocks();
+			Skin.drawWalls();
+			Skin.drawFloor();
+			Skin.drawRocks();
+			
+			Skin.drawPlayer();
 			
 		batch.end();
+		
+		//debugcam.render(world, cam.combined); ///////////////////////
 	}
 
 	@Override

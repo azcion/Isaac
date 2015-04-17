@@ -3,6 +3,7 @@ package graphics;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.isaac.entity.DynamicEntity;
 import com.isaac.main.MainScreen;
 import com.isaac.res.Assets;
 import com.isaac.res.Vars;
@@ -32,17 +33,21 @@ public class Skin {
 	}
 	
 	public static void drawWalls () {
-		MainScreen.batch.draw(Assets.sBack, 0, 0, w/2, h/2);
-		MainScreen.batch.draw(Assets.sBack, w, 0, -w/2, h/2);
-		MainScreen.batch.draw(Assets.sBack, 0, h, w/2, -h/2);
-		MainScreen.batch.draw(Assets.sBack, w, h, -w/2, -h/2);
+		MainScreen.batch.draw(Assets.sBack, 0, 0, w/2/PM, h/2/PM);
+		MainScreen.batch.draw(Assets.sBack, w/PM, 0, -w/2/PM, h/2/PM);
+		MainScreen.batch.draw(Assets.sBack, 0, h/PM, w/2/PM, -h/2/PM);
+		MainScreen.batch.draw(Assets.sBack, w/PM, h/PM, -w/2/PM, -h/2/PM);
 	}
 	
 	public static void drawFloor () {
-		MainScreen.batch.draw(Assets.sBackFloor1, w/9, h/6, w/2-w/9, h/2-h/6);
-		MainScreen.batch.draw(Assets.sBackFloor0, w/9*8, h/6, -(w/2-w/9), h/2-h/6);
-		MainScreen.batch.draw(Assets.sBackFloor0, w/9, h/6*5, w/2-w/9, -(h/2-h/6));
-		MainScreen.batch.draw(Assets.sBackFloor1, w/9*8, h/6*5, -(w/2-w/9), -(h/2-h/6));
+		MainScreen.batch.draw(
+				Assets.sBackFloor1, w/9/PM, h/6/PM, (w/2-w/9)/PM, (h/2-h/6)/PM);
+		MainScreen.batch.draw(
+				Assets.sBackFloor0, w/9*8/PM, h/6/PM, -(w/2-w/9)/PM, (h/2-h/6)/PM);
+		MainScreen.batch.draw(
+				Assets.sBackFloor0, w/9/PM, h/6*5/PM, (w/2-w/9)/PM, -(h/2-h/6)/PM);
+		MainScreen.batch.draw(
+				Assets.sBackFloor1, w/9*8/PM, h/6*5/PM, -(w/2-w/9)/PM, -(h/2-h/6)/PM);
 	}
 	
 	public static void drawRocks () {
@@ -56,10 +61,19 @@ public class Skin {
 						case 2: rock = Assets.sRock01[2]; break;
 						case 3: rock = Assets.sRock01[4]; break;
 					}
-					MainScreen.batch.draw(rock, Vars.x(j), Vars.y(i), x, y);
+					MainScreen.batch.draw(
+							rock, Vars.x(j)/PM, Vars.y(i)/PM, x/PM, y/PM);
 				}
 			}
 		}
+	}
+	
+	public static void drawPlayer () {
+		float xCoo = DynamicEntity.player.getPosition().x;
+		float yCoo = DynamicEntity.player.getPosition().y;
+		
+		MainScreen.batch.draw(
+				Assets.sPlayer[0], xCoo-x/2/PM, yCoo-y/2/PM, x/PM, y/PM);
 	}
 	
 	
