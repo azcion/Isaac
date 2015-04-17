@@ -7,8 +7,8 @@ class Seed {
 	public static Random r;
 	
 	public Seed (long seed) {
-		this.r = new Random();
-		this.r.setSeed(seed);
+		Seed.r = new Random();
+		Seed.r.setSeed(seed);
 	}
 	
 	public double nD () {

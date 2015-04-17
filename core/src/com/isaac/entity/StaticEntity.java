@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.isaac.main.MainScreen;
 import com.isaac.res.Assets;
 import com.isaac.res.Vars;
 
@@ -39,21 +40,21 @@ public class StaticEntity {
 		fdef.isSensor = false;
 		
 		bdef.position.set(w/9/2/PM, h/2/PM);
-		walls = Vars.world.createBody(bdef);
+		walls = MainScreen.world.createBody(bdef);
 		rect.setAsBox(w/9/2/PM, h/2/PM);
 		walls.createFixture(fdef).setUserData("wL");
 		
 		bdef.position.set(w/PM-w/9/2/PM, h/2/PM);
-		walls = Vars.world.createBody(bdef);
+		walls = MainScreen.world.createBody(bdef);
 		walls.createFixture(fdef).setUserData("wR");
 		
 		bdef.position.set(w/2/PM, h/6/2/PM);
-		walls = Vars.world.createBody(bdef);
+		walls = MainScreen.world.createBody(bdef);
 		rect.setAsBox(w/9*7/2/PM, h/6/2/PM);
 		walls.createFixture(fdef).setUserData("wU");
 		
 		bdef.position.set(w/2/PM, h/PM-h/6/2/PM);
-		walls = Vars.world.createBody(bdef);
+		walls = MainScreen.world.createBody(bdef);
 		walls.createFixture(fdef).setUserData("wD");
 	}
 	
@@ -65,7 +66,7 @@ public class StaticEntity {
 		fdef.isSensor = true;
 		
 		bdef.position.set(w/2/PM, h/2/PM);
-		ground = Vars.world.createBody(bdef);
+		ground = MainScreen.world.createBody(bdef);
 		floor.setAsBox(w/9*7/2/PM, h/6*4/2/PM);
 		ground.createFixture(fdef).setUserData("G");
 	}
@@ -87,7 +88,7 @@ public class StaticEntity {
 				}
 				
 				bdef.position.set((Vars.x(j)+x/2)/PM, (Vars.y(i)+y/2)/PM);
-				rocks = Vars.world.createBody(bdef);
+				rocks = MainScreen.world.createBody(bdef);
 				rock.setAsBox((x/2-x/10)/PM, (y/2-y/10)/PM);
 				rocks.createFixture(fdef).setUserData(
 						String.format("R_%d_%d", i, j)); /////

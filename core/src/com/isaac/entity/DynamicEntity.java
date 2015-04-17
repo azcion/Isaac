@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.isaac.main.MainScreen;
 import com.isaac.res.Vars;
 
 import static com.isaac.res.Vars.PM;
@@ -35,7 +36,7 @@ public class DynamicEntity {
 		fdef.isSensor = false;
 		
 		bdef.position.set(w/2/PM, h/2/PM);
-		player = Vars.world.createBody(bdef);
+		player = MainScreen.world.createBody(bdef);
 		head.setRadius(x/10*3/PM);
 		player.createFixture(fdef).setUserData("P");
 		player.setGravityScale(0);
