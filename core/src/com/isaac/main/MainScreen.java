@@ -6,8 +6,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -17,13 +15,10 @@ import com.isaac.entity.StaticEntity;
 import com.isaac.handlers.Contact;
 import com.isaac.handlers.Controls;
 import com.isaac.handlers.Movement;
-import com.isaac.res.Assets;
 
-import static com.isaac.res.Vars.PM;
+import static com.isaac.res.Vars.R;
 import static com.isaac.res.Vars.h;
 import static com.isaac.res.Vars.w;
-import static com.isaac.res.Vars.x;
-import static com.isaac.res.Vars.y;
 
 
 public class MainScreen implements Screen {
@@ -50,7 +45,7 @@ public class MainScreen implements Screen {
 		
 		cam = new OrthographicCamera();
 		debugcam = new Box2DDebugRenderer(); ///////////////////////
-		cam.setToOrtho(true, w/PM, h/PM);
+		cam.setToOrtho(true, w/R, h/R);
 		cam.update();
 		
 		StaticEntity.createWalls();
@@ -78,7 +73,7 @@ public class MainScreen implements Screen {
 		Gdx.gl30.glClearColor(0F, 0F, 0F, 1F);
 		Gdx.gl30.glClear(GL30.GL_COLOR_BUFFER_BIT);
 		
-		
+		System.out.println(Gdx.graphics.getFramesPerSecond());
 		
 		Controls.update();
 		update(1/60f);

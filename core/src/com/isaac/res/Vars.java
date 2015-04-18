@@ -1,7 +1,6 @@
 package com.isaac.res;
 
 import com.badlogic.gdx.Gdx;
-import com.isaac.main.MainScreen;
 
 
 public class Vars {
@@ -9,7 +8,7 @@ public class Vars {
 	public static Seed seed;
 	
 // pixels per meter
-	public static final float PM = 64;
+	public static final float R = 64;
 	
 // category bits
 	public static final short bGROUND = 1;	// 0000 0000 0000 0001

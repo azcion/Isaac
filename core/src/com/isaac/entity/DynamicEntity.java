@@ -8,7 +8,7 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.isaac.main.MainScreen;
 import com.isaac.res.Vars;
 
-import static com.isaac.res.Vars.PM;
+import static com.isaac.res.Vars.R;
 import static com.isaac.res.Vars.h;
 import static com.isaac.res.Vars.w;
 import static com.isaac.res.Vars.x;
@@ -35,9 +35,9 @@ public class DynamicEntity {
 		fdef.filter.maskBits = Vars.bWALL | Vars.bROCK;
 		fdef.isSensor = false;
 		
-		bdef.position.set(w/2/PM, h/2/PM);
+		bdef.position.set(w/2/R, h/2/R);
 		player = MainScreen.world.createBody(bdef);
-		head.setRadius(x/10*3/PM);
+		head.setRadius(x/10*3/R);
 		player.createFixture(fdef).setUserData("P");
 		player.setGravityScale(0);
 	}

@@ -220,4 +220,5 @@ pip-log.txt
 #############
 
 *.class
-core/bin/com/isaac/MainScreen.class
+
+*gradle*

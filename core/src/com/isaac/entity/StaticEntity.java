@@ -9,7 +9,7 @@ import com.isaac.main.MainScreen;
 import com.isaac.res.Assets;
 import com.isaac.res.Vars;
 
-import static com.isaac.res.Vars.PM;
+import static com.isaac.res.Vars.R;
 import static com.isaac.res.Vars.h;
 import static com.isaac.res.Vars.w;
 import static com.isaac.res.Vars.x;
@@ -39,21 +39,21 @@ public class StaticEntity {
 		fdef.filter.maskBits = Vars.bPLAYER;
 		fdef.isSensor = false;
 		
-		bdef.position.set(w/9/2/PM, h/2/PM);
+		bdef.position.set(w/9/2/R, h/2/R);
 		walls = MainScreen.world.createBody(bdef);
-		rect.setAsBox(w/9/2/PM, h/2/PM);
+		rect.setAsBox(w/9/2/R, h/2/R);
 		walls.createFixture(fdef).setUserData("wL");
 		
-		bdef.position.set(w/PM-w/9/2/PM, h/2/PM);
+		bdef.position.set(w/R-w/9/2/R, h/2/R);
 		walls = MainScreen.world.createBody(bdef);
 		walls.createFixture(fdef).setUserData("wR");
 		
-		bdef.position.set(w/2/PM, h/6/2/PM);
+		bdef.position.set(w/2/R, h/6/2/R);
 		walls = MainScreen.world.createBody(bdef);
-		rect.setAsBox(w/9*7/2/PM, h/6/2/PM);
+		rect.setAsBox(w/9*7/2/R, h/6/2/R);
 		walls.createFixture(fdef).setUserData("wU");
 		
-		bdef.position.set(w/2/PM, h/PM-h/6/2/PM);
+		bdef.position.set(w/2/R, h/R-h/6/2/R);
 		walls = MainScreen.world.createBody(bdef);
 		walls.createFixture(fdef).setUserData("wD");
 	}
@@ -65,9 +65,9 @@ public class StaticEntity {
 		fdef.filter.categoryBits = Vars.bGROUND;
 		fdef.isSensor = true;
 		
-		bdef.position.set(w/2/PM, h/2/PM);
+		bdef.position.set(w/2/R, h/2/R);
 		ground = MainScreen.world.createBody(bdef);
-		floor.setAsBox(w/9*7/2/PM, h/6*4/2/PM);
+		floor.setAsBox(w/9*7/2/R, h/6*4/2/R);
 		ground.createFixture(fdef).setUserData("G");
 	}
 	
@@ -87,9 +87,9 @@ public class StaticEntity {
 					continue;
 				}
 				
-				bdef.position.set((Vars.x(j)+x/2)/PM, (Vars.y(i)+y/2)/PM);
+				bdef.position.set((Vars.x(j)+x/2)/R, (Vars.y(i)+y/2)/R);
 				rocks = MainScreen.world.createBody(bdef);
-				rock.setAsBox((x/2-x/10)/PM, (y/2-y/10)/PM);
+				rock.setAsBox((x/2-x/10)/R, (y/2-y/10)/R);
 				rocks.createFixture(fdef).setUserData(
 						String.format("R_%d_%d", i, j)); /////
 			}
