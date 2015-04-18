@@ -222,3 +222,6 @@ pip-log.txt
 *.class
 
 *gradle*
+gradle*
+*gradle
+gradle
