@@ -1,4 +1,4 @@
-package com.isaac.handlers;
+package handlers;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;

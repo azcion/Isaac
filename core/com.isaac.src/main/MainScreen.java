@@ -1,7 +1,9 @@
-package com.isaac.main;
+package main;
 
-import graphics.Skin;
+import resources.Vars;
 
+import com.badlogic.ashley.core.Engine;
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
@@ -10,15 +12,17 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.isaac.entity.DynamicEntity;
-import com.isaac.entity.StaticEntity;
-import com.isaac.handlers.Contact;
-import com.isaac.handlers.Controls;
-import com.isaac.handlers.Movement;
 
-import static com.isaac.res.Vars.R;
-import static com.isaac.res.Vars.h;
-import static com.isaac.res.Vars.w;
+import entities.DynamicEntity;
+import entities.EntityManager;
+import entities.StaticEntity;
+import graphics.Skin;
+import handlers.Contact;
+import handlers.Controls;
+import handlers.Movement;
+import static resources.Vars.R;
+import static resources.Vars.h;
+import static resources.Vars.w;
 
 
 public class MainScreen implements Screen {
@@ -26,6 +30,7 @@ public class MainScreen implements Screen {
 	MainGame game;
 	
 	public static World world;
+	public static EntityManager manager;
 	
 	public static SpriteBatch batch;
 	
@@ -48,11 +53,9 @@ public class MainScreen implements Screen {
 		cam.setToOrtho(true, w/R, h/R);
 		cam.update();
 		
-		StaticEntity.createWalls();
-		StaticEntity.createGround();
-		StaticEntity.createRocks();
-		
-		DynamicEntity.createPlayer();
+		manager = new EntityManager();
+		manager.setupScene();
+		manager.setupEntities();
 		
 	}
 
@@ -63,7 +66,7 @@ public class MainScreen implements Screen {
 	
 	public void update (float delta) {
 		
-		Movement.handleInput();
+		manager.update();
 		
 		world.step(delta, 6, 2);
 	}
@@ -88,7 +91,7 @@ public class MainScreen implements Screen {
 			Skin.drawFloor();
 			Skin.drawRocks();
 			
-			Skin.drawPlayer();
+			manager.render();
 			
 		batch.end();
 		

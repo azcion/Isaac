@@ -1,4 +1,4 @@
-package com.isaac.res;
+package resources;
 
 import com.badlogic.gdx.Gdx;
 
@@ -14,10 +14,14 @@ public class Vars {
 	public static final short bGROUND = 1;	// 0000 0000 0000 0001
 	public static final short bWALL = 2;	// 0000 0000 0000 0010
 	public static final short bROCK = 4;	// 0000 0000 0000 0100
-	public static final short bPLAYER = 8;	// 0000 0000 0000 1000
+	public static final short bDOOR = 8;	// 0000 0000 0000 1000
+	public static final short bPLAYER = 16;	// 0000 0000 0001 0000
+	public static final short bENTITY = 32;	// 0000 0000 0010 0000
 	
 // limits
 	public static float SPEED = 5;
+	
+	public static float AFS = 1;
 	
 // window
 	public static int w = Gdx.graphics.getWidth();

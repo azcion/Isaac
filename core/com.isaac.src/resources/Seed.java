@@ -1,14 +1,15 @@
-package com.isaac.res;
+package resources;
 
 import java.util.Random;
 
-class Seed {
+
+public class Seed {
 	
-	public static Random r;
+	public Random r;
 	
 	public Seed (long seed) {
-		Seed.r = new Random();
-		Seed.r.setSeed(seed);
+		r = new Random();
+		r.setSeed(seed);
 	}
 	
 	public double nD () {

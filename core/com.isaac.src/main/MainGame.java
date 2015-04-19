@@ -1,11 +1,13 @@
-package com.isaac.main;
+package main;
+
+import handlers.Input;
 
 import java.io.IOException;
 
+import resources.Assets;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.isaac.handlers.Input;
-import com.isaac.res.Assets;
 
 
 public class MainGame extends Game {

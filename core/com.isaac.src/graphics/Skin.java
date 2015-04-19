@@ -1,29 +1,33 @@
 package graphics;
 
+import resources.Assets;
+import resources.Vars;
+import main.MainScreen;
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.isaac.entity.DynamicEntity;
-import com.isaac.main.MainScreen;
-import com.isaac.res.Assets;
-import com.isaac.res.Vars;
 
-import static com.isaac.res.Vars.R;
-import static com.isaac.res.Vars.w;
-import static com.isaac.res.Vars.h;
-import static com.isaac.res.Vars.x;
-import static com.isaac.res.Vars.y;
+import entities.DynamicEntity;
+import static resources.Vars.R;
+import static resources.Vars.h;
+import static resources.Vars.w;
+import static resources.Vars.x;
+import static resources.Vars.y;
 
 
 public class Skin {
 	
-	protected Body body;
+	protected DynamicEntity body;
 	protected Assets assets;
 	
 	protected float a, b;
 	protected int width, height;
 	
-	public Skin (Body body) {
-		this.body = body;
+	private int pos = 0; ///////////////////////////////////////////////
+	
+	public Skin (DynamicEntity ent) {
+		this.body = ent;
 		a = this.body.getPosition().x * R - width / 2;
 		b = this.body.getPosition().y * R - height / 2;
 	}
@@ -64,13 +68,22 @@ public class Skin {
 		}
 	}
 	
-	public static void drawPlayer () {
-		float xCoo = DynamicEntity.player.getPosition().x;
-		float yCoo = DynamicEntity.player.getPosition().y;
+	public void drawPlayer () {
+		float xc = body.getPosition().x;
+		float yc = body.getPosition().y;
 		
 		MainScreen.batch.draw(
-				Assets.sPlayer[0], xCoo-x/2/R, yCoo-y/2/R, x/R, y/R);
+				Assets.sPlayer[0], xc-x/2/R, yc-y/2/R, x/R, y/R);
 	}
 	
+	public void drawFly () {
+		float xc = body.getPosition().x;
+		float yc = body.getPosition().y;
+		
+		MainScreen.batch.draw(
+				Assets.sFly[pos], xc-x/2/R, yc-y/2/R, x/R, y/R);
+		
+		pos = (Gdx.graphics.getDeltaTime() % 0.25 < 0.01675) ? (pos == 3) ? 0 : pos+1 : pos;
+	}
 	
 }

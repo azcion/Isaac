@@ -1,4 +1,4 @@
-package com.isaac.res;
+package resources;
 
 import java.io.IOException;
 
@@ -26,6 +26,9 @@ public class Assets {
 	
 	public static Texture tPlayer;
 	public static Sprite[] sPlayer;
+	
+	public static Texture tFly;
+	public static Sprite[] sFly;
 	
 	public static void load () throws IOException {
 		load(System.currentTimeMillis());
@@ -67,14 +70,23 @@ public class Assets {
 			sPlayer[i].flip(false, true);
 		}
 		
+		// get fly
+		tFly = new Texture(Gdx.files.internal("monster/010_fly.png"));
+		sFly = new Sprite[4];
+		
+		for (int i = 0; i < 4; ++i) {
+			sFly[i] = new Sprite(tFly, i*32, 32, 32, 32);
+			sFly[i].flip(false, true);
+		}
+		
+		
+		
 		rockMap = new boolean[7][13];
 		rockMapS = new int[7][13];
 
 
 		generateRockMap(Gdx.files.local("txt/01_01.txt"));
-		generateRockMapS(Gdx.files.local("txt/01_01_R.txt"));
-		//RgenerateRockMapS(rockMap);
-		
+		generateRockMapS(Gdx.files.local("txt/01_01_R.txt"));	
 	}
 	
 	public static boolean obstructed (int i, int j) {

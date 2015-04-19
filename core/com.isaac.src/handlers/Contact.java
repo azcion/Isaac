@@ -1,4 +1,4 @@
-package com.isaac.handlers;
+package handlers;
 
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
