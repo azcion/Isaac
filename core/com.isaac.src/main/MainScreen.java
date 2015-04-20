@@ -95,7 +95,7 @@ public class MainScreen implements Screen {
 			
 		batch.end();
 		
-		//debugcam.render(world, cam.combined); ///////////////////////
+		debugcam.render(world, cam.combined); ///////////////////////
 	}
 
 	@Override
