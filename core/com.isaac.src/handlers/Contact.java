@@ -5,17 +5,33 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
+import entities.EntityManager;
+
 public class Contact implements ContactListener{
+	
+	double grace;
+	boolean isGrace;
 
 	@Override	// called when two fixtures start to collide
 	public void beginContact(com.badlogic.gdx.physics.box2d.Contact c) {
+		
 		Fixture fa = c.getFixtureA();
 		Fixture fb = c.getFixtureB();
-		String fas = (String) fa.getUserData();
-		String fbs = (String) fb.getUserData();
+		String aUD = (String) fa.getUserData();
+		String bUD = (String) fb.getUserData();
 		
-		if (fbs != null && fbs.equals("P")) {
-			
+		if (aUD != null && bUD != null) {
+			if (aUD.equals("P") && bUD.equals("M")) {
+				if (isGrace) {
+					if (System.currentTimeMillis()/1000. - grace > 1) {
+							isGrace = false;
+					}
+					return;
+				}
+				EntityManager.entity.damagePlayer(1);
+				grace = System.currentTimeMillis()/1000.;
+				isGrace = true;
+			}
 		}
 	}
 

@@ -1,7 +1,7 @@
 package logic;
 
 
-class Health {
+public class Health {
 	/*
 	 * 	There are four different types of health, each with their own pickups.
 	 *	The order in which hearts are placed is: Red, Soul, Black.
@@ -9,14 +9,15 @@ class Health {
 	 *	The character can hold a maximum of twelve hearts.
 	 */
 	
-	private int Container;
-	private int RedHeart;
-	private int SoulHeart;
-	private int DarkHeart;
-	private int[] Order;
+	protected int Container;
+	protected int RedHeart;
+	protected int SoulHeart;
+	protected int DarkHeart;
+	protected int[] Order;
+	private static final int[] OrderID = {0x09, 0x0A, 0x0B, 0x0C};
 	
 	public Health (int ch, int cont) {
-		this.Order = new int[4];
+		Order = new int[4];
 		if (ch != 9) {
 			this.Container = cont;
 			this.RedHeart = cont;
@@ -34,23 +35,30 @@ class Health {
 
 	public void setHealth (int ID, int val) {
 		switch (ID) {
-			case 0x09:	this.Container += val; break;
-			case 0x0A:	this.RedHeart += val; break;
-			case 0x0B:	this.SoulHeart += val; break;
-			case 0x0C:	this.DarkHeart += val; break;
+			case 0x09:	Container += val; break;
+			case 0x0A:	RedHeart += val; break;
+			case 0x0B:	SoulHeart += val; break;
+			case 0x0C:	DarkHeart += val; break;
 		}
 		trimHealth();
+		setOrder();
 	}
 	
 	public void setOrder () {
-		this.Order[0] = Container;
-		this.Order[1] = RedHeart;
-		this.Order[2] = SoulHeart;
-		this.Order[3] = DarkHeart;
+		Order[0] = Container;
+		Order[1] = RedHeart;
+		Order[2] = SoulHeart;
+		Order[3] = DarkHeart;
 	}
 	
 	public int[] getOrder () {
-		return this.Order;
+		return Order;
+	}
+	
+	public int getOrderID () {
+		if (Order[3] > 0) return OrderID[3];
+		if (Order[2] > 0) return OrderID[2];
+		return OrderID[1];
 	}
 	
 	public int fullHealth () {

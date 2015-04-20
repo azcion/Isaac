@@ -83,7 +83,7 @@ public class Skin {
 		MainScreen.batch.draw(
 				Assets.sFly[pos], xc-x/2/R, yc-y/2/R, x/R, y/R);
 		
-		pos = (Gdx.graphics.getDeltaTime() % 0.25 < 2/30f) ? (pos == 3) ? 0 : pos+1 : pos;
+		pos = (Gdx.graphics.getDeltaTime() % 0.25 < 1/15f) ? (pos == 3) ? 0 : pos+1 : pos;
 	}
 	
 }

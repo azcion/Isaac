@@ -67,7 +67,7 @@ public class DynamicEntity {
 		bdef.position.set(Y/R, X/R);
 		body = MainScreen.world.createBody(bdef);
 		fly.setRadius(x/8/R);
-		body.createFixture(fdef).setUserData("E");
+		body.createFixture(fdef).setUserData("M");
 		body.setGravityScale(0);
 	}
 

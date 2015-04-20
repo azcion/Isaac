@@ -57,7 +57,7 @@ class Pickup {
 		return Cards.get(ID);
 	}
 	
-	public void useCard (Character P, int ID) {
+	public void useCard (Player P, int ID) {
 		System.out.printf("\n<  < < %s > >  >\n", getCard(ID));
 		switch (ID) {
 			case 0x10:	/*TODO*/ break;
@@ -89,7 +89,7 @@ class Pickup {
 						P.setCoins(k); break;
 			case 0x29:	int c = (P.getCoins() != 0) ? P.getCoins() * 2 : 2;
 						P.setCoins(c); break;
-			case 0x2A:	P.setHealth(0x0A, P.getHealth());
+			case 0x2A:	P.setHealth(0x0A, P.getFullHealth());
 		}
 	}
 }

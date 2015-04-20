@@ -1,7 +1,7 @@
 package logic;
 
 
-class Carry {
+public class Carry {
 	/*
 	 *	Carried pickups are tools the player can use to interact with the game.
 	 *	Bombs produce blast damage, Keys unlock doors and chests, and Coins
@@ -10,10 +10,10 @@ class Carry {
 	 *	player's Health, decrease his speed and more.
 	 */
 	
-	private int Bombs;
-	private int Keys;
-	private int Coins;
-	private int Item;
+	protected int Bombs;
+	protected int Keys;
+	protected int Coins;
+	protected int Item;
 	
 	public Carry (int[] tools, int item) {
 		this.Bombs = tools[0];

@@ -24,11 +24,22 @@ public class Assets {
 	public static Texture tRockBasement;
 	public static Sprite[] sRock01;
 	
+	
+	
+	
 	public static Texture tPlayer;
 	public static Sprite[] sPlayer;
 	
 	public static Texture tFly;
 	public static Sprite[] sFly;
+	
+	
+	
+	
+	public static Texture tUI_Hearts;
+	public static Sprite[] sUI_Hearts;  // fr, hr nr, s, fs, hs, fd, hd
+	
+	
 	
 	public static void load () throws IOException {
 		load(System.currentTimeMillis());
@@ -38,7 +49,7 @@ public class Assets {
 		Vars.seed = new Seed(seed);
 		
 		// get backgrounds
-		tBack = new Texture(Gdx.files.internal("png/01_B.png"));
+		tBack = new Texture(Gdx.files.internal("scene/01_B.png"));
 		sBack = new Sprite(tBack, 0, 0, 234, 156);
 		sBackFloor0 = new Sprite(tBack, 52, 364, 182, 104);
 		sBackFloor1 = new Sprite(tBack, 286, 364, 182, 104);
@@ -47,11 +58,11 @@ public class Assets {
 		sBackFloor1.flip(false, true);
 		
 		// get doors
-		tDoorHole = new Texture(Gdx.files.internal("png/01_D_H.png"));
+		tDoorHole = new Texture(Gdx.files.internal("scene/01_D_H.png"));
 		sDoorHole = new Sprite(tDoorHole);
 		
 		// get rocks
-		tRockBasement = new Texture(Gdx.files.internal("png/01_R.png"));
+		tRockBasement = new Texture(Gdx.files.internal("scene/01_R.png"));
 		sRock01 = new Sprite[9];
 		
 		for (int i = 0; i < 4; ++i) {
@@ -77,6 +88,17 @@ public class Assets {
 		for (int i = 0; i < 4; ++i) {
 			sFly[i] = new Sprite(tFly, i*32, 32, 32, 32);
 			sFly[i].flip(false, true);
+		}
+		
+		// get UI hearts
+		tUI_Hearts = new Texture(Gdx.files.internal("ui/hearts.png"));
+		sUI_Hearts = new Sprite[8];
+		
+		for (int i = 0; i < 4; ++i) {
+			sUI_Hearts[i] = new Sprite(tUI_Hearts, i*16, 0, 16, 16);
+			sUI_Hearts[i+4] = new Sprite(tUI_Hearts, i*16, 16, 16, 16);
+			sUI_Hearts[i].flip(false, true);
+			sUI_Hearts[i+4].flip(false, true);
 		}
 		
 		

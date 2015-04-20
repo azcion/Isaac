@@ -1,9 +1,12 @@
 package logic;
 
-import resources.Seed;
+import static resources.Vars.seed;
+import resources.Vars;
 
 
-class Character {
+
+
+public class Player {
 	/*
 	 * 	Health represents the amount of damage the player can take before dying.
 	 * 	Damage refers to the amount of damage each tear does to enemies.
@@ -47,7 +50,6 @@ class Character {
 			0,    0,    0,    0,    0,    0,    0,    0x10, 0,    0,    0
 	};
 	
-	private final Seed R;
 	private String	_Name;
 	private Health	_Health;
 	private double	_Damage;
@@ -58,33 +60,33 @@ class Character {
 	private int 	_Luck;
 	private Carry	_Carry;
 	
-	public Character (int ch, long seed) {
-		this.R = new Seed(seed);
-		this._Name = __Characters[ch];
-		this._Health = new Health(ch, __Health[ch]);
-		if (ch != 9) {
-			this._Damage = 3.5 * __Damage[ch];
-			this._Tears = (__Tears[ch] > 0) ? 
-					16 - Math.sqrt(1 + __Tears[ch] * 1.3) * 6 :
-					16 - __Tears[ch] * 6;
-			this._ShotSpeed = __ShotSpeed[ch];
-			this._Range = __Range[ch] - 0.25;
-			this._Speed = __Speed[ch];
-			this._Luck = __Luck[ch];
-			this._Carry = new Carry(__StartingPickups[ch], __StartingItem[ch]);
+	public Player () {
+		int c = Vars.CHARACTER;
+		this._Name = __Characters[c];
+		this._Health = new Health(c, __Health[c]);
+		if (c != 9) {
+			this._Damage = 3.5 * __Damage[c];
+			this._Tears = (__Tears[c] > 0) ? 
+					16 - Math.sqrt(1 + __Tears[c] * 1.3) * 6 :
+					16 - __Tears[c] * 6;
+			this._ShotSpeed = __ShotSpeed[c];
+			this._Range = __Range[c] - 0.25;
+			this._Speed = __Speed[c];
+			this._Luck = __Luck[c];
+			this._Carry = new Carry(__StartingPickups[c], __StartingItem[c]);
 		} else {
-			double p = R.nD(); double q = R.nD(); double r = R.nD();
-			double s = R.nD(); double t = R.nD(); double u = R.nD();
-			this._Damage = 3.5 * __Damage[ch] + p * 0.58 - 0.29;
-			this._Tears = (__Tears[ch] > 0) ?
-					16 - Math.sqrt(1 + (__Tears[ch] + q * 1.4 - 0.7) * 1.3) * 6 :
-					16 - (__Tears[ch] + q * 1.4 - 0.7) * 6;
-			this._ShotSpeed = __ShotSpeed[ch] + r * 0.5 - 0.25;
-			this._Range = __Range[ch] - 0.25 + s * 10 - 5;
-			this._Speed = __Speed[ch] + t * 0.4 - 0.2;
-			this._Luck = (u < 0.5) ? ++__Luck[ch] : --__Luck[ch];
+			double p = seed.nD(); double q = seed.nD(); double r = seed.nD();
+			double s = seed.nD(); double t = seed.nD(); double u = seed.nD();
+			this._Damage = 3.5 * __Damage[c] + p * 0.58 - 0.29;
+			this._Tears = (__Tears[c] > 0) ?
+					16 - Math.sqrt(1 + (__Tears[c] + q * 1.4 - 0.7) * 1.3) * 6 :
+					16 - (__Tears[c] + q * 1.4 - 0.7) * 6;
+			this._ShotSpeed = __ShotSpeed[c] + r * 0.5 - 0.25;
+			this._Range = __Range[c] - 0.25 + s * 10 - 5;
+			this._Speed = __Speed[c] + t * 0.4 - 0.2;
+			this._Luck = (u < 0.5) ? ++__Luck[c] : --__Luck[c];
 			int[] pu = {(int) ((p+q)/2*3), (int) ((r+s)/2*3), (int) ((t+u)/2*3)};
-			this._Carry = new Carry(pu, __StartingItem[ch]);
+			this._Carry = new Carry(pu, __StartingItem[c]);
 		}
 	}
 	
@@ -143,8 +145,12 @@ class Character {
 		return this._Name;
 	}
 	
-	public int getHealth () {
+	public int getFullHealth () {
 		return this._Health.fullHealth();
+	}
+	
+	public Health getHealth () {
+		return this._Health;
 	}
 	
 	public double getDamage () {
@@ -196,7 +202,7 @@ class Character {
 				+"Bombs:       %d\n"
 				+"Keys:        %d\n"
 				+"Coins:       %d\n",
-				getName(), getHealth(), getDamage(), getTears(),
+				getName(), getFullHealth(), getDamage(), getTears(),
 				getShotSpeed(), getRange(), getSpeed(), getLuck(),
 				getBombs(), getKeys(), getCoins());
 	}

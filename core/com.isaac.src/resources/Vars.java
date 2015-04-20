@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 public class Vars {
 	
 	public static Seed seed;
+	public static final int CHARACTER = 0;
 	
 // pixels per meter
 	public static final float R = 64;
@@ -39,6 +40,7 @@ public class Vars {
 		// y coordinate of a column
 		return h / 6 + y * col;
 	}
+	
 	
 	
 	

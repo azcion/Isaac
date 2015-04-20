@@ -38,7 +38,7 @@ class Item {
 		return Items.get(ID);
 	}
 	
-	public void useItem (Character P, int ID) {
+	public void useItem (Player P, int ID) {
 		System.out.printf("\n<  < < %s > >  >\n", getItem(ID));
 		switch (ID) {
 			case 0x30:	P.setTears(0.7); 

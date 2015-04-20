@@ -1,19 +1,18 @@
 package entities;
 
+import logic.Player;
 import resources.Vars;
 import graphics.Skin;
 import handlers.Movement;
 
-import com.badlogic.ashley.core.Engine;
-import com.badlogic.ashley.core.Entity;
 
 
 
 public class EntityManager {
 	
-	public Engine engine;
-	
 	private Movement movement;
+	
+	public static Entity entity;
 	
 	private StaticEntity[] scene;	// walls, ground, rocks, doors
 	private DynamicEntity player;
@@ -23,8 +22,11 @@ public class EntityManager {
 	private Skin[][] monsterSkins;
 	
 	public EntityManager () {
-		engine = new Engine();
+		
+		entity = new Entity(new Player());
+		//System.out.println(entity.ePLAYER.toString());	//////////////////
 		movement = new Movement();
+		
 		scene = new StaticEntity[4];
 		player = new DynamicEntity();
 		monsters = new DynamicEntity[5][10];	///////////////////

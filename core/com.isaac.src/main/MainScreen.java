@@ -17,6 +17,7 @@ import entities.DynamicEntity;
 import entities.EntityManager;
 import entities.StaticEntity;
 import graphics.Skin;
+import graphics.UserInterface;
 import handlers.Contact;
 import handlers.Controls;
 import handlers.Movement;
@@ -67,6 +68,9 @@ public class MainScreen implements Screen {
 	public void update (float delta) {
 		
 		manager.update();
+		UserInterface.update();
+		Controls.update();
+		cam.update();
 		
 		world.step(delta, 6, 2);
 	}
@@ -76,14 +80,11 @@ public class MainScreen implements Screen {
 		Gdx.gl30.glClearColor(0F, 0F, 0F, 1F);
 		Gdx.gl30.glClear(GL30.GL_COLOR_BUFFER_BIT);
 		
-		System.out.println(Gdx.graphics.getFramesPerSecond());
+		//System.out.println(Gdx.graphics.getFramesPerSecond()); /////////////////////
 		
-		Controls.update();
 		update(1/60f);
 		
-		cam.update();
 		batch.setProjectionMatrix(cam.combined);
-		
 		
 		batch.begin();
 			
@@ -92,6 +93,8 @@ public class MainScreen implements Screen {
 			Skin.drawRocks();
 			
 			manager.render();
+			
+			UserInterface.render();
 			
 		batch.end();
 		
