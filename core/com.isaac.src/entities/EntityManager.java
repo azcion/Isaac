@@ -14,9 +14,9 @@ public class EntityManager {
 	
 	public static Entity entity;
 	
-	private StaticEntity[] scene;	// walls, ground, rocks, doors
-	private DynamicEntity player;
-	private DynamicEntity[][] monsters;
+	private Room room;
+	private DynamicBody player;
+	private DynamicBody[][] monsters;
 	
 	private Skin playerSkin;
 	private Skin[][] monsterSkins;
@@ -24,31 +24,21 @@ public class EntityManager {
 	public EntityManager () {
 		
 		entity = new Entity(new Player());
+		newRoom(Vars.w, Vars.h);
 		//System.out.println(entity.ePLAYER.toString());	//////////////////
 		movement = new Movement();
 		
-		scene = new StaticEntity[4];
-		player = new DynamicEntity();
-		monsters = new DynamicEntity[5][10];	///////////////////
+		player = new DynamicBody();
+		monsters = new DynamicBody[5][10];	///////////////////
 		monsterSkins = new Skin[5][10];			///////////////////
 	}
 	
+	public void newRoom (float x0, float y0) {
+		room = new Room(x0, y0);
+	}
+	
 	public void setupScene () {
-		// walls
-		scene[0] = new StaticEntity();
-		scene[0].createWalls();
-		
-		// ground
-		scene[1] = new StaticEntity();
-		scene[1].createGround();
-		
-		// rocks
-		scene[2] = new StaticEntity();
-		scene[2].createRocks();
-		
-		// doors
-		scene[3] = new StaticEntity();
-		scene[3].createDoors();
+		room.update();
 	}
 	
 	public void setupEntities () {
@@ -57,7 +47,7 @@ public class EntityManager {
 		
 		// fly
 		for (int j = 0; j < 10; ++j) {
-			monsters[0][j] = new DynamicEntity();
+			monsters[0][j] = new DynamicBody();
 			monsters[0][j].createFly(Vars.x(3), Vars.y(j+3));
 			monsterSkins[0][j] = new Skin(monsters[0][j]);
 		}
@@ -66,7 +56,7 @@ public class EntityManager {
 	public void update () {
 		Movement.handleInput(player);
 		//Movement.chase();
-		for (DynamicEntity i : monsters[0]) {
+		for (DynamicBody i : monsters[0]) {
 			movement.idle(i);
 		}
 	}

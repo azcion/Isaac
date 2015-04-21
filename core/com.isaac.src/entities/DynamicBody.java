@@ -18,14 +18,14 @@ import static resources.Vars.x;
 import static resources.Vars.y;
 
 
-public class DynamicEntity {
+public class DynamicBody {
 	
 	public Body body;
 	
 	private static BodyDef bdef = new BodyDef();
 	private static FixtureDef fdef = new FixtureDef();
 	
-	public DynamicEntity () {
+	public DynamicBody () {
 		bdef = new BodyDef();
 		fdef = new FixtureDef();
 	}
@@ -35,7 +35,7 @@ public class DynamicEntity {
 		bdef.type = BodyType.DynamicBody;
 		fdef.shape = head;
 		fdef.filter.categoryBits = Vars.bPLAYER;
-		fdef.filter.maskBits = Vars.bWALL | Vars.bROCK | Vars.bENTITY;
+		fdef.filter.maskBits = Vars.bDOOR | Vars.bWALL | Vars.bROCK | Vars.bENTITY;
 		fdef.isSensor = false;
 		
 		bdef.position.set(w/2/R, (h/2+x/2)/R);
@@ -59,12 +59,11 @@ public class DynamicEntity {
 		CircleShape fly = new CircleShape();
 		bdef.type = BodyType.DynamicBody;
 		fdef.shape = fly;
-		fdef.restitution = 1;
 		fdef.filter.categoryBits = Vars.bENTITY;
 		fdef.filter.maskBits = Vars.bDOOR | Vars.bWALL | Vars.bPLAYER | Vars.bENTITY;
 		fdef.isSensor = false;
 		
-		bdef.position.set(Y/R, X/R);
+		bdef.position.set(Y/2/R, X/R);
 		body = MainScreen.world.createBody(bdef);
 		fly.setRadius(x/8/R);
 		body.createFixture(fdef).setUserData("M");

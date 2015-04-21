@@ -8,7 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.Body;
 
-import entities.DynamicEntity;
+import entities.DynamicBody;
 import static resources.Vars.R;
 import static resources.Vars.h;
 import static resources.Vars.w;
@@ -18,7 +18,7 @@ import static resources.Vars.y;
 
 public class Skin {
 	
-	protected DynamicEntity body;
+	protected DynamicBody body;
 	protected Assets assets;
 	
 	protected float a, b;
@@ -26,7 +26,7 @@ public class Skin {
 	
 	private int pos = 0; ///////////////////////////////////////////////
 	
-	public Skin (DynamicEntity ent) {
+	public Skin (DynamicBody ent) {
 		this.body = ent;
 		a = this.body.getPosition().x * R - width / 2;
 		b = this.body.getPosition().y * R - height / 2;

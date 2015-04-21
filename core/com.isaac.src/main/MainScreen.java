@@ -1,9 +1,5 @@
 package main;
 
-import resources.Vars;
-
-import com.badlogic.ashley.core.Engine;
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
@@ -12,15 +8,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-
-import entities.DynamicEntity;
 import entities.EntityManager;
-import entities.StaticEntity;
 import graphics.Skin;
 import graphics.UserInterface;
 import handlers.Contact;
 import handlers.Controls;
-import handlers.Movement;
 import static resources.Vars.R;
 import static resources.Vars.h;
 import static resources.Vars.w;
@@ -80,7 +72,7 @@ public class MainScreen implements Screen {
 		Gdx.gl30.glClearColor(0F, 0F, 0F, 1F);
 		Gdx.gl30.glClear(GL30.GL_COLOR_BUFFER_BIT);
 		
-		//System.out.println(Gdx.graphics.getFramesPerSecond()); /////////////////////
+		System.out.println(Gdx.graphics.getFramesPerSecond()); /////////////////////
 		
 		update(1/60f);
 		

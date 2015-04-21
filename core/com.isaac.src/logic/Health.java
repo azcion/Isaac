@@ -36,7 +36,7 @@ public class Health {
 	public void setHealth (int ID, int val) {
 		switch (ID) {
 			case 0x09:	Container += val; break;
-			case 0x0A:	RedHeart += val; break;
+			case 0x0A:	RedHeart  += val; break;
 			case 0x0B:	SoulHeart += val; break;
 			case 0x0C:	DarkHeart += val; break;
 		}

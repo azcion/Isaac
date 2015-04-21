@@ -13,30 +13,31 @@ public class Assets {
 	
 	
 	
-	public static Texture tBack;
+	private static Texture tBack;
 	public static Sprite sBack, sBackFloor0, sBackFloor1;
 	
-	public static Texture tDoorHole;
+	private static Texture tDoorHole;
 	public static Sprite sDoorHole;
 	
 	public static boolean[][] rockMap;
 	public static int[][] rockMapS;
-	public static Texture tRockBasement;
+	private static Texture tRockBasement;
 	public static Sprite[] sRock01;
 	
 	
 	
 	
-	public static Texture tPlayer;
+	private static Texture tPlayer;
 	public static Sprite[] sPlayer;
 	
-	public static Texture tFly;
+	private static Texture tFly;
 	public static Sprite[] sFly;
 	
+	public static boolean[][] monsterMap;
+	public static int[][] monsterMapS;
 	
 	
-	
-	public static Texture tUI_Hearts;
+	private static Texture tUI_Hearts;
 	public static Sprite[] sUI_Hearts;  // fr, hr nr, s, fs, hs, fd, hd
 	
 	
@@ -105,10 +106,15 @@ public class Assets {
 		
 		rockMap = new boolean[7][13];
 		rockMapS = new int[7][13];
+		monsterMap = new boolean[7][13];
+		monsterMapS = new int[7][13];
 
 
-		generateRockMap(Gdx.files.local("txt/01_01.txt"));
-		generateRockMapS(Gdx.files.local("txt/01_01_R.txt"));	
+		generateRockMap(Gdx.files.local("txt/01_01_R_bool.txt"));
+		generateRockMapS(Gdx.files.local("txt/01_01_R_int.txt"));	
+		generateMonsterMap(Gdx.files.local("txt/01_01_M_bool.txt"));
+		generateMonsterMapS(Gdx.files.local("txt/01_01_M_int.txt"));
+		
 	}
 	
 	public static boolean obstructed (int i, int j) {
@@ -140,7 +146,7 @@ public class Assets {
 		}
 	}
 	
-	public static void RgenerateRockMapS (boolean[][] rockMap) {
+	/*public static void RgenerateRockMapS (boolean[][] rockMap) {
 		for (int i = 0; i < 7; ++i) {
 			for (int j = 0; j < 13; ++j) {
 				if (rockMap[i][j]) {
@@ -154,6 +160,30 @@ public class Assets {
 						case 3: rockMapS[i][j] = (Vars.seed.nD() > 0.95) ? 4 : 3; break;
 					}
 				}
+			}
+		}
+	}*/
+	
+	public static void generateMonsterMap (FileHandle file) throws IOException {
+		String[] lines = file.readString().split("\\r?\\n");
+		String[][] tiles = new String[7][13];
+		
+		for (int i = 0; i < 7; ++i) {
+			tiles[i] = lines[i].split(" ");
+			for (int j = 0; j < 13; ++j) {
+				monsterMap[i][j] = "1".equals(tiles[i][j]);
+			}
+		}
+	}
+	
+	public static void generateMonsterMapS (FileHandle file) throws IOException {
+		String[] lines = file.readString().split("\\r?\\n");
+		String[][] tiles = new String[7][13];
+		
+		for (int i = 0; i < 7; ++i) {
+			tiles[i] = lines[i].split(" ");
+			for (int j = 0; j < 13; ++j) {
+				monsterMapS[i][j] = Integer.valueOf(tiles[i][j]);
 			}
 		}
 	}

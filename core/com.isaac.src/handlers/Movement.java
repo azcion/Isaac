@@ -3,7 +3,7 @@ package handlers;
 import resources.Vars;
 
 import com.badlogic.gdx.math.Vector2;
-import entities.DynamicEntity;
+import entities.DynamicBody;
 
 
 
@@ -13,7 +13,7 @@ public class Movement {
 		
 	}
 	
-	public static void handleInput (DynamicEntity user) {
+	public static void handleInput (DynamicBody user) {
 		Vector2 v = user.getLinearVelocity();
 		
 		v.x = 0;
@@ -53,7 +53,7 @@ public class Movement {
 		user.setLinearVelocity(v);
 	}	
 	
-	public void idle (DynamicEntity ent) {
+	public void idle (DynamicBody ent) {
 		Vector2 v = ent.getLinearVelocity();
 		
 		switch (Vars.seed.nI(4)) {
@@ -78,7 +78,7 @@ public class Movement {
 		ent.setLinearVelocity(v);
 	}
 	
-	public void chase (DynamicEntity user, DynamicEntity ent) {
+	public void chase (DynamicBody user, DynamicBody ent) {
 		Vector2 p = user.getPosition();
 		Vector2 e = ent.getPosition();
 		//Vector2 e = DynamicEntity.attackFly.getLinearVelocity();
