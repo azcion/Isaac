@@ -63,7 +63,7 @@ public class DynamicBody {
 		fdef.filter.maskBits = Vars.bDOOR | Vars.bWALL | Vars.bPLAYER | Vars.bENTITY;
 		fdef.isSensor = false;
 		
-		bdef.position.set(Y/2/R, X/R);
+		bdef.position.set(Y/R, X/R);
 		body = MainScreen.world.createBody(bdef);
 		fly.setRadius(x/8/R);
 		body.createFixture(fdef).setUserData("M");

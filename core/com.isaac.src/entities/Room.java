@@ -3,13 +3,17 @@ package entities;
 import java.util.Map;
 import java.util.HashMap;
 
+import logic.Monster;
+
 
 
 public class Room {
 	
 	private float x0, y0;
 	private StaticBody walls, floor, doors, rocks;
-	private Map<Entity, String> MONSTERS = new HashMap<Entity, String>();
+	public Map<Entity, Integer> MONSTERS = new HashMap<Entity, Integer>();
+	
+	private static int roomMonsterID = 0x00;
 	
 	
 	public Room (float x0, float y0) {
@@ -33,6 +37,10 @@ public class Room {
 		rocks.createRocks(x0, y0);
 	}
 	
+	private void addEntity (int monsterID) {
+		MONSTERS.put(new Entity(new Monster(monsterID)), roomMonsterID);
+		++roomMonsterID;
+	}
 	
 	
 }

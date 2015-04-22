@@ -3,7 +3,6 @@ package graphics;
 import resources.Assets;
 import resources.Vars;
 import main.MainScreen;
-import entities.EntityManager;
 
 import static resources.Vars.R;
 
@@ -27,16 +26,16 @@ public class UserInterface {
 	protected static int keys;
 	
 	public static void update () {
-		health = EntityManager.entity.ePLAYER.getHealth().fullHealth();
-		order = EntityManager.entity.ePLAYER.getHealth().getOrder();
+		health = MainScreen.manager.PLAYER.ePLAYER.getHealth().fullHealth();
+		order = MainScreen.manager.PLAYER.ePLAYER.getHealth().getOrder();
 		
 		fullRed  = order[1];
 		fullSoul = order[2];
 		fullDark = order[3];
 		
-		coins = EntityManager.entity.ePLAYER.getCoins();
-		bombs = EntityManager.entity.ePLAYER.getBombs();
-		keys  = EntityManager.entity.ePLAYER.getKeys();
+		coins = MainScreen.manager.PLAYER.ePLAYER.getCoins();
+		bombs = MainScreen.manager.PLAYER.ePLAYER.getBombs();
+		keys  = MainScreen.manager.PLAYER.ePLAYER.getKeys();
 	}
 	
 	public static void render () {

@@ -12,7 +12,7 @@ public class EntityManager {
 	
 	private Movement movement;
 	
-	public static Entity entity;
+	public Entity PLAYER;
 	
 	private Room room;
 	private DynamicBody player;
@@ -23,14 +23,13 @@ public class EntityManager {
 	
 	public EntityManager () {
 		
-		entity = new Entity(new Player());
+		PLAYER = new Entity(new Player());
 		newRoom(Vars.w, Vars.h);
-		//System.out.println(entity.ePLAYER.toString());	//////////////////
 		movement = new Movement();
 		
 		player = new DynamicBody();
 		monsters = new DynamicBody[5][10];	///////////////////
-		monsterSkins = new Skin[5][10];			///////////////////
+		monsterSkins = new Skin[5][10];		///////////////////
 	}
 	
 	public void newRoom (float x0, float y0) {
@@ -68,5 +67,9 @@ public class EntityManager {
 		for (Skin i : monsterSkins[0]) {
 			i.drawFly();
 		}
+	}
+	
+	private void cleanupBodies () {
+		
 	}
 }
