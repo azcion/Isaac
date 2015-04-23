@@ -39,7 +39,7 @@ public class Room {
 	
 	public void addMonster (int monsterID, float x, float y) {
 		Entity monster = new Entity(new Monster(monsterID));
-		monster.body.createFly(x, y);
+		monster.body.createFly(x, y);			////////////////////////////
 		MONSTERS.put(roomMonsterID, monster);
 		++roomMonsterID;
 	}

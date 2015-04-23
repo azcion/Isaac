@@ -16,7 +16,6 @@ public class EntityManager {
 	
 	private Room room;
 	private DynamicBody player;
-	//private DynamicBody[][] monsters;
 	
 	private Skin playerSkin;
 	private Skin[][] monsterSkins;
@@ -28,8 +27,7 @@ public class EntityManager {
 		movement = new Movement();
 		
 		player = new DynamicBody();
-		//monsters = new DynamicBody[5][10];	///////////////////
-		monsterSkins = new Skin[7][13];		///////////////////
+		monsterSkins = new Skin[7][13];
 	}
 	
 	public void newRoom (float x0, float y0) {
@@ -45,22 +43,15 @@ public class EntityManager {
 		playerSkin = new Skin(player);
 		
 		// fly
-		/*
-		for (int j = 0; j < 10; ++j) {
-			monsters[0][j] = new DynamicBody();
-			monsters[0][j].createFly(Vars.x(3), Vars.y(j+3));
-			monsterSkins[0][j] = new Skin(monsters[0][j]);
-		}*/
-		
+		int flyID = 0;
 		for (int i = 0; i < 7; ++i) {
 			for (int j = 0; j < 13; ++j) {
-				
 				if (!Assets.monsterMap[i][j]) {
 					continue;
 				}
-				
-				room.addMonster(0x00, Vars.x(i), Vars.y(j));
-				monsterSkins[i][j] = new Skin(room.MONSTERS.get(0x00).body);
+				room.addMonster(0x00, Vars.y(i), Vars.x(j));
+				monsterSkins[i][j] = new Skin(room.MONSTERS.get(flyID).body);
+				++flyID;
 				
 			}
 		}
@@ -75,12 +66,12 @@ public class EntityManager {
 	
 	public void render () {
 		playerSkin.drawPlayer();
-		
+				
 		// fly
 		for (Skin[] i : monsterSkins) {
 			for (Skin j : i) {
 				if (j != null) {
-					j.drawFly();
+					j.draw();
 				}
 			}
 		}

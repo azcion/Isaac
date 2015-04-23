@@ -75,13 +75,13 @@ public class Skin {
 				Assets.sPlayer[0], xc-x/2/R, yc-y/2/R, x/R, y/R);
 	}
 	
-	public void drawFly () {
+	public void draw () {		
 		float xc = body.getPosition().x;
 		float yc = body.getPosition().y;
-		System.out.printf("%f\n%f\n\n", xc, yc);
 		MainScreen.batch.draw(
 				Assets.sFly[pos], xc-x/2/R, yc-y/2/R, x/R, y/R);
 		
+		// temporary animation thingy
 		pos = (Gdx.graphics.getDeltaTime() % 0.25 < 1/15f) ? (pos == 3) ? 0 : pos+1 : pos;
 	}
 	
