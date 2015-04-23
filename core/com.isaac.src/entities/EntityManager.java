@@ -49,10 +49,9 @@ public class EntityManager {
 				if (!Assets.monsterMap[i][j]) {
 					continue;
 				}
-				room.addMonster(0x00, Vars.y(i), Vars.x(j));
+				room.addMonster(0x00, Vars.y(i)+45, Vars.x(j)+45); ///////////////////
 				monsterSkins[i][j] = new Skin(room.MONSTERS.get(flyID).body);
 				++flyID;
-				
 			}
 		}
 	}

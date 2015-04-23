@@ -33,7 +33,7 @@ public class Room {
 	private void createRoom () {
 		walls.createWalls(x0, y0);
 		floor.createGround(x0, y0);
-		doors.createDoors(x0, y0, false, true, true, true);
+		doors.createDoors(x0, y0, false, false, false, false);
 		rocks.createRocks(x0, y0);
 	}
 	
