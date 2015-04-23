@@ -20,7 +20,7 @@ import static resources.Vars.y;
 
 public class DynamicBody {
 	
-	public Body body;
+	private Body body;
 	
 	private static BodyDef bdef = new BodyDef();
 	private static FixtureDef fdef = new FixtureDef();
@@ -71,14 +71,14 @@ public class DynamicBody {
 	}
 
 	public Vector2 getLinearVelocity () {
-		return body.getLinearVelocity();
+		return this.body.getLinearVelocity();
 	}
 	
 	public void setLinearVelocity (Vector2 v) {
-		body.setLinearVelocity(v);
+		this.body.setLinearVelocity(v);
 	}
 
 	public Vector2 getPosition () {
-		return body.getPosition();
+		return this.body.getPosition();
 	}
 }

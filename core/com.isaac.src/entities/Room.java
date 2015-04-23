@@ -11,7 +11,7 @@ public class Room {
 	
 	private float x0, y0;
 	private StaticBody walls, floor, doors, rocks;
-	public Map<Entity, Integer> MONSTERS = new HashMap<Entity, Integer>();
+	public Map<Integer, Entity> MONSTERS = new HashMap<Integer, Entity>();
 	
 	private static int roomMonsterID = 0x00;
 	
@@ -37,10 +37,20 @@ public class Room {
 		rocks.createRocks(x0, y0);
 	}
 	
-	private void addEntity (int monsterID) {
-		MONSTERS.put(new Entity(new Monster(monsterID)), roomMonsterID);
+	public void addMonster (int monsterID, float x, float y) {
+		Entity monster = new Entity(new Monster(monsterID));
+		monster.body.createFly(x, y);
+		MONSTERS.put(roomMonsterID, monster);
 		++roomMonsterID;
 	}
 	
+	public void idle () {
+		for (Map.Entry<Integer, Entity> i : MONSTERS.entrySet()) {
+			EntityManager.movement.idle(i.getValue().body);
+		}
+	}
 	
+	private void cleanupBodies () {
+		
+	}
 }

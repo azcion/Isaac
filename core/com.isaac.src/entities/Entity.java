@@ -2,7 +2,6 @@ package entities;
 
 import logic.Monster;
 import logic.Player;
-import main.MainScreen;
 
 
 
@@ -11,7 +10,7 @@ public class Entity {
 	public Player ePLAYER;
 	public Monster eMONSTER;
 	
-	private DynamicBody body;
+	public DynamicBody body;
 	
 	public Entity (Player player) {
 		ePLAYER = player;

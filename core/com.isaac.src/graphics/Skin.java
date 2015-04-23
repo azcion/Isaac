@@ -3,17 +3,16 @@ package graphics;
 import resources.Assets;
 import resources.Vars;
 import main.MainScreen;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.physics.box2d.Body;
-
 import entities.DynamicBody;
+
 import static resources.Vars.R;
 import static resources.Vars.h;
 import static resources.Vars.w;
 import static resources.Vars.x;
 import static resources.Vars.y;
+
 
 
 public class Skin {
@@ -24,7 +23,7 @@ public class Skin {
 	protected float a, b;
 	protected int width, height;
 	
-	private int pos = 0; ///////////////////////////////////////////////
+	private int pos = 0; ////////////////temporary animation var//////////////
 	
 	public Skin (DynamicBody ent) {
 		this.body = ent;
@@ -79,7 +78,7 @@ public class Skin {
 	public void drawFly () {
 		float xc = body.getPosition().x;
 		float yc = body.getPosition().y;
-		
+		System.out.printf("%f\n%f\n\n", xc, yc);
 		MainScreen.batch.draw(
 				Assets.sFly[pos], xc-x/2/R, yc-y/2/R, x/R, y/R);
 		
