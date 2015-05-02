@@ -4,21 +4,24 @@ import java.util.Map;
 import java.util.HashMap;
 
 import logic.Monster;
+import main.MainScreen;
 
 
 
 public class Room {
 	
-	private float x0, y0;
+	public float X, Y;
 	private StaticBody walls, floor, doors, rocks;
 	public Map<Integer, Entity> MONSTERS = new HashMap<Integer, Entity>();
 	
 	private static int roomMonsterID = 0x00;
 	
 	
-	public Room (float x0, float y0) {
-		this.x0 = x0;
-		this.y0 = y0;
+	public Room (float x, float y) {
+		X = x;
+		Y = y;
+		
+		//MainScreen.cam.setToOrtho(true, X, Y);
 		
 		walls = new StaticBody();
 		floor = new StaticBody();
@@ -31,10 +34,10 @@ public class Room {
 	}
 	
 	private void createRoom () {
-		walls.createWalls(x0, y0);
-		floor.createGround(x0, y0);
-		doors.createDoors(x0, y0, false, false, false, false);
-		rocks.createRocks(x0, y0);
+		walls.createWalls(X, Y);
+		floor.createGround(X, Y);
+		doors.createDoors(X, Y, false, false, false, false);
+		rocks.createRocks(X, Y);
 	}
 	
 	public void addMonster (int monsterID, float x, float y) {

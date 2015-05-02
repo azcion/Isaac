@@ -8,7 +8,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+
 import entities.EntityManager;
+import entities.RoomManager;
 import graphics.Skin;
 import graphics.UserInterface;
 import handlers.Contact;
@@ -23,6 +25,7 @@ public class MainScreen implements Screen {
 	MainGame game;
 	
 	public static World world;
+	public static RoomManager roomManager;
 	public static EntityManager manager;
 	
 	public static SpriteBatch batch;
@@ -43,9 +46,11 @@ public class MainScreen implements Screen {
 		
 		cam = new OrthographicCamera();
 		debugcam = new Box2DDebugRenderer(); ///////////////////////
-		cam.setToOrtho(true, w/R, h/R);
+		cam.setToOrtho(true, w/32, h/32);//w/R, h/R);
+		cam.translate(-w/(2*R), -h/(2*R));
 		cam.update();
 		
+		roomManager = new RoomManager(4);		
 		manager = new EntityManager();
 		manager.setupScene();
 		manager.setupEntities();

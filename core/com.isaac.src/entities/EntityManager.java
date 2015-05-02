@@ -1,6 +1,7 @@
 package entities;
 
 import logic.Player;
+import main.MainScreen;
 import resources.Assets;
 import resources.Vars;
 import graphics.Skin;
@@ -13,8 +14,7 @@ public class EntityManager {
 	static Movement movement;
 	
 	public Entity PLAYER;
-	
-	private Room room;
+	private Room currentRoom;
 	private DynamicBody player;
 	
 	private Skin playerSkin;
@@ -23,19 +23,15 @@ public class EntityManager {
 	public EntityManager () {
 		
 		PLAYER = new Entity(new Player());
-		newRoom(Vars.w, Vars.h);
 		movement = new Movement();
 		
+		currentRoom = MainScreen.roomManager.rooms[0];
 		player = new DynamicBody();
 		monsterSkins = new Skin[7][13];
 	}
 	
-	public void newRoom (float x0, float y0) {
-		room = new Room(x0, y0);
-	}
-	
 	public void setupScene () {
-		room.update();
+		currentRoom.update();
 	}
 	
 	public void setupEntities () {
@@ -49,8 +45,8 @@ public class EntityManager {
 				if (!Assets.monsterMap[i][j]) {
 					continue;
 				}
-				room.addMonster(0x00, Vars.y(i)+45, Vars.x(j)+45); ///////////////////
-				monsterSkins[i][j] = new Skin(room.MONSTERS.get(flyID).body);
+				currentRoom.addMonster(0x00, Vars.y(i)+45, Vars.x(j)+45); ///////////////////
+				monsterSkins[i][j] = new Skin(currentRoom.MONSTERS.get(flyID).body);
 				++flyID;
 			}
 		}
@@ -59,7 +55,7 @@ public class EntityManager {
 	public void update () {
 		Movement.handleInput(player);
 		//Movement.chase();
-		room.idle();
+		currentRoom.idle();
 		
 	}
 	
