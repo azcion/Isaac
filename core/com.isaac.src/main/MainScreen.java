@@ -50,7 +50,7 @@ public class MainScreen implements Screen {
 		cam.translate(-w/(2*R), -h/(2*R));
 		cam.update();
 		
-		roomManager = new RoomManager(4);		
+		roomManager = new RoomManager(1);		
 		manager = new EntityManager();
 		manager.setupScene();
 		manager.setupEntities();

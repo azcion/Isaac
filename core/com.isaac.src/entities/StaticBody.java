@@ -11,11 +11,13 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 import static resources.Vars.R;
-import static resources.Vars.x;
-import static resources.Vars.y;
+//import static resources.Vars.x;
+//import static resources.Vars.y;
 
 
 public class StaticBody {
+	
+	private static float X, Y;
 	
 	public Body body;
 	
@@ -27,7 +29,12 @@ public class StaticBody {
 		fdef = new FixtureDef();
 	}
 	
-	public void createWalls (float x0, float y0) {
+	public static void setCoords (float x, float y) {
+		StaticBody.X = x;
+		StaticBody.Y = y;
+	}
+	
+	public void createWalls (float a, float b) {
 		
 		PolygonShape rect = new PolygonShape();
 		bdef.type = BodyType.StaticBody;
@@ -36,40 +43,20 @@ public class StaticBody {
 		fdef.filter.maskBits = Vars.bPLAYER | Vars.bENTITY;
 		fdef.isSensor = false;
 		
-		bdef.position.set(x0/9/2/R, y0/2/R/2);			// left up
-		body = MainScreen.world.createBody(bdef);
-		rect.setAsBox(x0/9/2/R, (y0/2/2-x*0.73f)/R);
-		body.createFixture(fdef).setUserData("W");
+		float[] xCoords = {a/9/2/R, (a-a/9/2)/R, a/2/2/R, (a-a/2/2)/R};
+		float[] yCoords = {b/2/2/R, (b-b/2/2)/R, b/6/2/R, (b-b/6/2)/R};
+		int[] xc = {0, 1, 0, 1, 2, 2, 3, 3}; // index of vars in xCoords
+		int[] yc = {0, 0, 1, 1, 2, 3, 2, 3}; // index of vars in yCoords
 		
-		bdef.position.set(x0/9/2/R, (y0-y0/2/2)/R);		// left down
-		body = MainScreen.world.createBody(bdef);
-		body.createFixture(fdef).setUserData("W");
-		
-		bdef.position.set((x0-x0/9/2)/R, y0/2/R/2);		// right up
-		body = MainScreen.world.createBody(bdef);
-		body.createFixture(fdef).setUserData("W");
-		
-		bdef.position.set((x0-x0/9/2)/R, (y0-y0/2/2)/R);	// right down
-		body = MainScreen.world.createBody(bdef);
-		body.createFixture(fdef).setUserData("W");
-		
-		bdef.position.set(x0/2/R/2, y0/6/2/R);			// up left
-		body = MainScreen.world.createBody(bdef);
-		rect.setAsBox((x0/2/2-x*0.73f)/R, y0/6/2/R);
-		body.createFixture(fdef).setUserData("W");
-		
-		bdef.position.set((x0-x0/2/2)/R, y0/6/2/R);		// up right
-		body = MainScreen.world.createBody(bdef);
-		body.createFixture(fdef).setUserData("W");
-		
-		bdef.position.set(x0/2/R/2, (y0-y0/6/2)/R);		// down left
-		body = MainScreen.world.createBody(bdef);
-		rect.setAsBox((x0/2/2-x*0.73f)/R, y0/6/2/R);
-		body.createFixture(fdef).setUserData("W");
-		
-		bdef.position.set((x0-x0/2/2)/R, (y0-y0/6/2)/R);	// down right
-		body = MainScreen.world.createBody(bdef);
-		body.createFixture(fdef).setUserData("W");
+		for (int i = 0; i < 8; ++i) {
+			switch (i) {
+			case 0:    rect.setAsBox(a/9/2/R, (b/2/2-X*0.73f)/R); break;
+			case 4:    rect.setAsBox((a/2/2-X*0.73f)/R, b/6/2/R); break;
+			}
+			bdef.position.set(xCoords[yc[i]], yCoords[xc[i]]);
+			body = MainScreen.world.createBody(bdef);
+			body.createFixture(fdef).setUserData("W");
+		}
 	}
 	
 	public void createGround (float x0, float y0) {
@@ -101,9 +88,9 @@ public class StaticBody {
 					continue;
 				}
 				
-				bdef.position.set((Vars.x(j)+x/2)/R, (Vars.y(i)+y/2)/R);
+				bdef.position.set((Vars.x(j)+X/2)/R, (Vars.y(i)+Y/2)/R);
 				body = MainScreen.world.createBody(bdef);
-				rock.setAsBox((x/2-x/10)/R, (y/2-y/10)/R);
+				rock.setAsBox((X/2-X/10)/R, (Y/2-Y/10)/R);
 				body.createFixture(fdef).setUserData(
 						String.format("R_%d_%d", i, j)); /////
 			}
@@ -116,35 +103,28 @@ public class StaticBody {
 		PolygonShape door = new PolygonShape();
 		bdef.type = BodyType.StaticBody;
 		fdef.shape = door;
+		door.setAsBox(X*0.73f/R, X*0.73f/R);
 		fdef.filter.categoryBits = Vars.bDOOR;
 		fdef.isSensor = false;
 		
-		fdef.filter.maskBits = (passableU) ? 
-				Vars.bENTITY : Vars.bPLAYER | Vars.bENTITY;
-		bdef.position.set(x0/2/R, 1);
-		body = MainScreen.world.createBody(bdef);
-		door.setAsBox(x*0.73f/R, x*0.73f/R);
-		body.createFixture(fdef).setUserData("D_U");
+		short bitPE = Vars.bPLAYER | Vars.bENTITY;
+		short[] bits = {
+				(passableU) ? Vars.bENTITY : bitPE,
+				(passableD) ? Vars.bENTITY : bitPE,
+				(passableL) ? Vars.bENTITY : bitPE,
+				(passableR) ? Vars.bENTITY : bitPE
+		};
+		float[] xCoords = {x0/2/R, X*1.16f/R, (x0-X*1.16f)/R};
+		float[] yCoords = {1, y0/R-1, y0/2/R};
+		int[] xc = {0, 0, 1, 2};
+		int[] yc = {0, 1, 2, 2};
+		String[] UD = {"U", "D", "L", "R"};
 		
-		fdef.filter.maskBits = (passableD) ? 
-				Vars.bENTITY : Vars.bPLAYER | Vars.bENTITY;
-		bdef.position.set(x0/2/R, y0/R-1);
-		body = MainScreen.world.createBody(bdef);
-		door.setAsBox(x*0.73f/R, x*0.73f/R);
-		body.createFixture(fdef).setUserData("D_D");
-		
-		fdef.filter.maskBits = (passableL) ?
-				Vars.bENTITY : Vars.bPLAYER | Vars.bENTITY;
-		bdef.position.set(x*1.16f/R, y0/2/R);
-		body = MainScreen.world.createBody(bdef);
-		door.setAsBox(x*0.73f/R, x*0.73f/R);
-		body.createFixture(fdef).setUserData("D_L");
-		
-		fdef.filter.maskBits = (passableR) ? 
-				Vars.bENTITY : Vars.bPLAYER | Vars.bENTITY;
-		bdef.position.set((x0-x*1.16f)/R, y0/2/R);
-		body = MainScreen.world.createBody(bdef);
-		door.setAsBox(x*0.73f/R, x*0.73f/R);
-		body.createFixture(fdef).setUserData("D_R");
+		for (int i = 0; i < 4; ++i) {
+			fdef.filter.maskBits = bits[i];
+			bdef.position.set(xCoords[xc[i]], yCoords[yc[i]]);
+			body = MainScreen.world.createBody(bdef);
+			body.createFixture(fdef).setUserData("D_" + UD[i]);
+		}
 	}
 }
