@@ -50,8 +50,8 @@ public class StaticBody {
 		
 		for (int i = 0; i < 8; ++i) {
 			switch (i) {
-			case 0:    rect.setAsBox(a/9/2/R, (b/2/2-X*0.73f)/R); break;
-			case 4:    rect.setAsBox((a/2/2-X*0.73f)/R, b/6/2/R); break;
+			case 0:    rect.setAsBox(a/9/2/R, (b/2/2-Vars.x*0.73f)/R); break;
+			case 4:    rect.setAsBox((a/2/2-Vars.x*0.73f)/R, b/6/2/R); break;
 			}
 			bdef.position.set(xCoords[yc[i]], yCoords[xc[i]]);
 			body = MainScreen.world.createBody(bdef);
@@ -88,9 +88,9 @@ public class StaticBody {
 					continue;
 				}
 				
-				bdef.position.set((Vars.x(j)+X/2)/R, (Vars.y(i)+Y/2)/R);
+				bdef.position.set((Vars.x(j)+Vars.x/2)/R, (Vars.y(i)+Vars.y/2)/R);
 				body = MainScreen.world.createBody(bdef);
-				rock.setAsBox((X/2-X/10)/R, (Y/2-Y/10)/R);
+				rock.setAsBox((Vars.x/2-Vars.x/10)/R, (Vars.y/2-Vars.y/10)/R);
 				body.createFixture(fdef).setUserData(
 						String.format("R_%d_%d", i, j)); /////
 			}
@@ -103,7 +103,7 @@ public class StaticBody {
 		PolygonShape door = new PolygonShape();
 		bdef.type = BodyType.StaticBody;
 		fdef.shape = door;
-		door.setAsBox(X*0.73f/R, X*0.73f/R);
+		door.setAsBox(Vars.x*0.73f/R, Vars.x*0.73f/R);
 		fdef.filter.categoryBits = Vars.bDOOR;
 		fdef.isSensor = false;
 		
@@ -114,7 +114,7 @@ public class StaticBody {
 				(passableL) ? Vars.bENTITY : bitPE,
 				(passableR) ? Vars.bENTITY : bitPE
 		};
-		float[] xCoords = {x0/2/R, X*1.16f/R, (x0-X*1.16f)/R};
+		float[] xCoords = {x0/2/R, Vars.x*1.16f/R, (x0-Vars.x*1.16f)/R};
 		float[] yCoords = {1, y0/R-1, y0/2/R};
 		int[] xc = {0, 0, 1, 2};
 		int[] yc = {0, 1, 2, 2};

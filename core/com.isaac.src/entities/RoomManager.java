@@ -18,15 +18,15 @@ public class RoomManager {
 		this.roomCount = roomCount;
 		rooms = new Room[roomCount];
 		
-		X = Vars.w/2;
-		Y = Vars.h/2;
+		X = Vars.w;
+		Y = Vars.h;
 		RgenerateRooms();
 	}
 	
 	private void RgenerateRooms () {
 		for (int i = 0; i < roomCount; ++i) {
 			if (tempC[i]) {
-				rooms[i] = new Room(X+X*i, Y);
+				rooms[i] = new Room(X, Y);//+X*i, Y);
 			}
 			X += Vars.w;
 		}
