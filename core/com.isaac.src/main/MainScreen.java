@@ -46,11 +46,11 @@ public class MainScreen implements Screen {
 		
 		cam = new OrthographicCamera();
 		debugcam = new Box2DDebugRenderer(); ///////////////////////
-		cam.setToOrtho(true, w/32, h/32);//w/R, h/R);
+		cam.setToOrtho(true, w/(R/2), h/(R/2));//w/R, h/R);
 		cam.translate(-w/(2*R), -h/(2*R));
 		cam.update();
 		
-		roomManager = new RoomManager(1);		
+		roomManager = new RoomManager(2);	////////////////////////	
 		manager = new EntityManager();
 		manager.setupScene();
 		manager.setupEntities();

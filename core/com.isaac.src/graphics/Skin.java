@@ -3,10 +3,12 @@ package graphics;
 import resources.Assets;
 import resources.Vars;
 import main.MainScreen;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import entities.DynamicBody;
 
+import entities.DynamicBody;
+import entities.EntityManager;
 import static resources.Vars.R;
 import static resources.Vars.h;
 import static resources.Vars.w;
@@ -20,33 +22,33 @@ public class Skin {
 	protected DynamicBody body;
 	protected Assets assets;
 	
-	protected float a, b;
-	protected int width, height;
+	private static float X;
+	private static float Y;
 	
 	private int pos = 0; ////////////////temporary animation var//////////////
 	
 	public Skin (DynamicBody ent) {
 		this.body = ent;
-		a = this.body.getPosition().x * R - width / 2;
-		b = this.body.getPosition().y * R - height / 2;
+		X = EntityManager.currentRoom.X/2;
+		Y = EntityManager.currentRoom.Y;
 	}
 	
 	public static void drawWalls () {
-		MainScreen.batch.draw(Assets.sBack, 0, 0, w/2/R, h/2/R);
-		MainScreen.batch.draw(Assets.sBack, w/R, 0, -w/2/R, h/2/R);
-		MainScreen.batch.draw(Assets.sBack, 0, h/R, w/2/R, -h/2/R);
-		MainScreen.batch.draw(Assets.sBack, w/R, h/R, -w/2/R, -h/2/R);
+		MainScreen.batch.draw(Assets.sBack, X+0, Y+0, w/2/R, h/2/R);
+		MainScreen.batch.draw(Assets.sBack, X+w/R, Y+0, -w/2/R, h/2/R);
+		MainScreen.batch.draw(Assets.sBack, X+0, Y+h/R, w/2/R, -h/2/R);
+		MainScreen.batch.draw(Assets.sBack, X+w/R, Y+h/R, -w/2/R, -h/2/R);
 	}
 	
 	public static void drawFloor () {
 		MainScreen.batch.draw(
-				Assets.sBackFloor1, w/9/R, h/6/R, (w/2-w/9)/R, (h/2-h/6)/R);
+				Assets.sBackFloor1, X+w/9/R, Y+h/6/R, (w/2-w/9)/R, (h/2-h/6)/R);
 		MainScreen.batch.draw(
-				Assets.sBackFloor0, w/9*8/R, h/6/R, -(w/2-w/9)/R, (h/2-h/6)/R);
+				Assets.sBackFloor0, X+w/9*8/R, Y+h/6/R, -(w/2-w/9)/R, (h/2-h/6)/R);
 		MainScreen.batch.draw(
-				Assets.sBackFloor0, w/9/R, h/6*5/R, (w/2-w/9)/R, -(h/2-h/6)/R);
+				Assets.sBackFloor0, X+w/9/R, Y+h/6*5/R, (w/2-w/9)/R, -(h/2-h/6)/R);
 		MainScreen.batch.draw(
-				Assets.sBackFloor1, w/9*8/R, h/6*5/R, -(w/2-w/9)/R, -(h/2-h/6)/R);
+				Assets.sBackFloor1, X+w/9*8/R, Y+h/6*5/R, -(w/2-w/9)/R, -(h/2-h/6)/R);
 	}
 	
 	public static void drawRocks () {
@@ -61,7 +63,7 @@ public class Skin {
 						case 3: rock = Assets.sRock01[4]; break;
 					}
 					MainScreen.batch.draw(
-							rock, Vars.x(j)/R, Vars.y(i)/R, x/R, y/R);
+							rock, X+Vars.x(j)/R, Y+Vars.y(i)/R, x/R, y/R);
 				}
 			}
 		}

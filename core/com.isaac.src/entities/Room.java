@@ -20,7 +20,7 @@ public class Room {
 	public Room (float x, float y) {
 		X = x;
 		Y = y;
-		System.out.printf("%f\t%f\n%f\t%f", X, Y, Vars.x, Vars.y);
+		//System.out.printf("%f\t%f\n%f\t%f", X, Y, Vars.x, Vars.y);
 		
 		//MainScreen.cam.setToOrtho(true, X, Y);
 		
@@ -35,11 +35,11 @@ public class Room {
 	}
 	
 	private void createRoom () {
-		StaticBody.setCoords(X, Y);
-		walls.createWalls(X, Y);
-		floor.createGround(X, Y);
-		doors.createDoors(X, Y, false, false, false, false);
-		rocks.createRocks(X, Y);
+		StaticBody.setCoords(X/2, Y);
+		walls.createWalls();
+		floor.createGround();
+		doors.createDoors(false, false, true, true);
+		rocks.createRocks();
 	}
 	
 	public void addMonster (int monsterID, float x, float y) {

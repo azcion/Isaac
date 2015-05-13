@@ -20,6 +20,9 @@ import static resources.Vars.y;
 
 public class DynamicBody {
 	
+	private static float X;
+	private static float Y;
+	
 	private Body body;
 	
 	private static BodyDef bdef = new BodyDef();
@@ -30,6 +33,11 @@ public class DynamicBody {
 		fdef = new FixtureDef();
 	}
 	
+	public static void setCoords (float x, float y) {
+		DynamicBody.X = x;
+		DynamicBody.Y = y;
+	}
+	
 	public void createPlayer () {
 		CircleShape head = new CircleShape();
 		bdef.type = BodyType.DynamicBody;
@@ -38,7 +46,7 @@ public class DynamicBody {
 		fdef.filter.maskBits = Vars.bDOOR | Vars.bWALL | Vars.bROCK | Vars.bENTITY;
 		fdef.isSensor = false;
 		
-		bdef.position.set(w/2/R, (h/2+x/2)/R);
+		bdef.position.set(X+w/2/R, Y+(h/2+x/2)/R);
 		body = MainScreen.world.createBody(bdef);
 		head.setRadius(x/3/R);
 		body.createFixture(fdef).setUserData("P");
@@ -55,7 +63,7 @@ public class DynamicBody {
 		entityBody.setGravityScale(0);*/
 	}
 	
-	public void createFly (float X, float Y) {
+	public void createFly (float a, float b) {
 		CircleShape fly = new CircleShape();
 		bdef.type = BodyType.DynamicBody;
 		fdef.shape = fly;
@@ -63,7 +71,7 @@ public class DynamicBody {
 		fdef.filter.maskBits = Vars.bDOOR | Vars.bWALL | Vars.bPLAYER | Vars.bENTITY;
 		fdef.isSensor = false;
 		
-		bdef.position.set(Y/R, X/R);
+		bdef.position.set(X+b/R, Y+a/R);
 		body = MainScreen.world.createBody(bdef);
 		fly.setRadius(x/8/R);
 		body.createFixture(fdef).setUserData("M");

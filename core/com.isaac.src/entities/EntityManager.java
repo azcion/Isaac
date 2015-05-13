@@ -10,31 +10,38 @@ import handlers.Movement;
 
 
 public class EntityManager {
-	
+		
 	static Movement movement;
 	
+	public static Room currentRoom;
+	
 	public Entity PLAYER;
-	private Room currentRoom;
-	private DynamicBody player;
+	public DynamicBody player;
 	
 	private Skin playerSkin;
 	private Skin[][] monsterSkins;
 	
 	public EntityManager () {
 		
-		PLAYER = new Entity(new Player());
 		movement = new Movement();
-		
-		currentRoom = MainScreen.roomManager.rooms[0];
+		currentRoom = MainScreen.roomManager.rooms[0]; /////////////////////
+		PLAYER = new Entity(new Player());
 		player = new DynamicBody();
 		monsterSkins = new Skin[7][13];
 	}
 	
-	public void setupScene () {
-		currentRoom.update();
+	public void setupScene () { //////////////////////////////////////////////
+		for (int i = 0; i < MainScreen.roomManager.rooms.length; ++i) {
+			MainScreen.roomManager.rooms[i].update();
+		}
+		//currentRoom.update();
 	}
 	
 	public void setupEntities () {
+		/*for (int i = 0; i < MainScreen.roomManager.count; ++i) {
+			DynamicBody.setCoords(MainScreen.roomManager.rooms[i])
+		}*/
+		DynamicBody.setCoords(currentRoom.X/2, currentRoom.Y);
 		player.createPlayer();
 		playerSkin = new Skin(player);
 		
