@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import entities.EntityManager;
 import entities.RoomManager;
+import entities.TearManager;
 import graphics.Skin;
 import graphics.UserInterface;
 import handlers.Contact;
@@ -25,8 +26,9 @@ public class MainScreen implements Screen {
 	MainGame game;
 	
 	public static World world;
-	public static RoomManager roomManager;
-	public static EntityManager manager;
+	public static RoomManager rManager;
+	public static EntityManager eManager;
+	public static TearManager tManager;
 	
 	public static SpriteBatch batch;
 	
@@ -50,10 +52,11 @@ public class MainScreen implements Screen {
 		cam.translate(-w/(2*R), -h/(2*R));
 		cam.update();
 		
-		roomManager = new RoomManager(2);	////////////////////////	
-		manager = new EntityManager();
-		manager.setupScene();
-		manager.setupEntities();
+		rManager = new RoomManager(1);	////////////////////////	
+		eManager = new EntityManager();
+		tManager = new TearManager();
+		eManager.setupScene();
+		eManager.setupEntities();
 		
 	}
 
@@ -64,7 +67,8 @@ public class MainScreen implements Screen {
 	
 	public void update (float delta) {
 		
-		manager.update();
+		eManager.update();
+		tManager.update();
 		UserInterface.update();
 		Controls.update();
 		cam.update();
@@ -89,7 +93,7 @@ public class MainScreen implements Screen {
 			Skin.drawFloor();
 			Skin.drawRocks();
 			
-			manager.render();
+			eManager.render();
 			
 			UserInterface.render();
 			

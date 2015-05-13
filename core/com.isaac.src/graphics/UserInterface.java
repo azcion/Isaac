@@ -32,16 +32,16 @@ public class UserInterface {
 		UserInterface.X = EntityManager.currentRoom.X / 2;
 		UserInterface.Y = EntityManager.currentRoom.Y;
 		
-		health = MainScreen.manager.PLAYER.ePLAYER.getHealth().fullHealth();
-		order = MainScreen.manager.PLAYER.ePLAYER.getHealth().getOrder();
+		health = MainScreen.eManager.PLAYER.ePLAYER.getHealth().fullHealth();
+		order = MainScreen.eManager.PLAYER.ePLAYER.getHealth().getOrder();
 		
 		fullRed  = order[1];
 		fullSoul = order[2];
 		fullDark = order[3];
 		
-		coins = MainScreen.manager.PLAYER.ePLAYER.getCoins();
-		bombs = MainScreen.manager.PLAYER.ePLAYER.getBombs();
-		keys  = MainScreen.manager.PLAYER.ePLAYER.getKeys();
+		coins = MainScreen.eManager.PLAYER.ePLAYER.getCoins();
+		bombs = MainScreen.eManager.PLAYER.ePLAYER.getBombs();
+		keys  = MainScreen.eManager.PLAYER.ePLAYER.getKeys();
 	}
 	
 	public static void render () {

@@ -21,8 +21,8 @@ public class TearManager {
 		for (Iterator<Tear> t = tears.iterator(); t.hasNext(); ) {
 			Tear tear = t.next();
 			tear.update();
-			
-			if (tear.position.x > Vars.w) {
+			if (Math.abs(tear.position.x - MainScreen.eManager.player.getPosition().x)
+					> Vars.w/Vars.R/2) {
 				t.remove();
 			}
 		}
@@ -30,8 +30,10 @@ public class TearManager {
 	
 	public void shoot () {
 		Tear tear = new Tear();
-		tear.position.set(MainScreen.manager.player.getPosition());
+		tear.position.set(MainScreen.eManager.player.getPosition());
 		tears.add(tear);
+		
+		System.out.println(tears.size);
 	}
 	
 	

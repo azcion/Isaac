@@ -24,15 +24,15 @@ public class EntityManager {
 	public EntityManager () {
 		
 		movement = new Movement();
-		currentRoom = MainScreen.roomManager.rooms[0]; /////////////////////
+		currentRoom = MainScreen.rManager.rooms[0]; /////////////////////
 		PLAYER = new Entity(new Player());
 		player = new DynamicBody();
 		monsterSkins = new Skin[7][13];
 	}
 	
 	public void setupScene () { //////////////////////////////////////////////
-		for (int i = 0; i < MainScreen.roomManager.rooms.length; ++i) {
-			MainScreen.roomManager.rooms[i].update();
+		for (int i = 0; i < MainScreen.rManager.rooms.length; ++i) {
+			MainScreen.rManager.rooms[i].update();
 		}
 		//currentRoom.update();
 	}

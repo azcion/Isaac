@@ -1,5 +1,7 @@
 package entities;
 
+import resources.Vars;
+
 import com.badlogic.gdx.math.Vector2;
 
 
@@ -11,7 +13,7 @@ public class Tear {
 	
 	public Tear () {
 		position = new Vector2();
-		velocity = 5f; /////////////////
+		velocity = 5/Vars.R; /////////////////
 	}
 	
 	public void update () {

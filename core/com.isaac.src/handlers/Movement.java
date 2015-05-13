@@ -1,8 +1,10 @@
 package handlers;
 
+import main.MainScreen;
 import resources.Vars;
 
 import com.badlogic.gdx.math.Vector2;
+
 import entities.DynamicBody;
 
 
@@ -48,6 +50,9 @@ public class Movement {
 		} else
 		if (Controls.isDown(Controls.D)) {
 			v.x = Vars.SPEED;
+		} else
+		if (Controls.isDown(Controls.RIGHT)) {
+			MainScreen.tManager.shoot();
 		}
 		
 		user.setLinearVelocity(v);

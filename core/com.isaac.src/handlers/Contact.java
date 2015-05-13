@@ -28,7 +28,7 @@ public class Contact implements ContactListener{
 					}
 					return;
 				}
-				MainScreen.manager.PLAYER.damagePlayer(1);
+				MainScreen.eManager.PLAYER.damagePlayer(1);
 				grace = System.currentTimeMillis()/1000.;
 				isGrace = true;
 			}
