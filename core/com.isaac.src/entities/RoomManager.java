@@ -26,11 +26,10 @@ public class RoomManager {
 	private void RgenerateRooms () {
 		for (int i = 0; i < count; ++i) {
 			if (tempC[i]) {
-				rooms[i] = new Room(2*i*X, 0*Y);//+X*i, Y);
+				rooms[i] = new Room(2*i*X, 0*Y);
 				System.out.printf("X: %f\nY: %f", X, Y);
 			}
 			X += Vars.w;
 		}
 	}
-	
 }

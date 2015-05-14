@@ -80,7 +80,7 @@ public class StaticBody {
 		bdef.type = BodyType.StaticBody;
 		fdef.shape = rock;
 		fdef.filter.categoryBits = Vars.bROCK;
-		fdef.filter.maskBits = Vars.bPLAYER;
+		fdef.filter.maskBits = Vars.bPLAYER | Vars.bENTITY;
 		fdef.isSensor = false;
 		
 		for (int i = 0; i < 7; ++i) {

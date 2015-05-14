@@ -19,20 +19,28 @@ public class Monster {
 	private int 	_Speed;
 	
 	public Monster(int ID) {
-		this._Name = __Monsters[ID];
-		this._Health = __Health[ID];
-		this._Speed = __Speed[ID];
+		_Name = __Monsters[ID];
+		_Health = __Health[ID];
+		_Speed = __Speed[ID];
 	}
 	
 	public String getName () {
-		return this._Name;
+		return _Name;
 	}
 	
 	public int getHP () {
-		return this._Health;
+		return _Health;
 	}
 	
 	public double getSpeed () {
-		return this._Speed;
+		return _Speed;
+	}
+	
+	public boolean isDead () {
+		return _Health <= 0;
+	}
+	
+	public void damage (double strength) {
+		_Health -= strength;
 	}
 }

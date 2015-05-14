@@ -14,7 +14,7 @@ public class Room {
 	private StaticBody walls, floor, doors, rocks;
 	public Map<Integer, Entity> MONSTERS = new HashMap<Integer, Entity>();
 	
-	private static int roomMonsterID = 0x00;
+	public static int roomMonsterID = 0x00;
 	
 	
 	public Room (float x, float y) {
@@ -44,7 +44,7 @@ public class Room {
 	
 	public void addMonster (int monsterID, float x, float y) {
 		Entity monster = new Entity(new Monster(monsterID));
-		monster.body.createFly(x, y);			////////////////////////////
+		monster.body.createFly(x, y, roomMonsterID);		////////////////////////////
 		MONSTERS.put(roomMonsterID, monster);
 		++roomMonsterID;
 	}

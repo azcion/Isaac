@@ -6,6 +6,7 @@ import main.MainScreen;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -23,12 +24,14 @@ public class DynamicBody {
 	private static float X;
 	private static float Y;
 	
-	private Body body;
+	public boolean dead;
 	
+	private Body body;
 	private static BodyDef bdef = new BodyDef();
 	private static FixtureDef fdef = new FixtureDef();
 	
 	public DynamicBody () {
+		dead = false;
 		bdef = new BodyDef();
 		fdef = new FixtureDef();
 	}
@@ -63,7 +66,24 @@ public class DynamicBody {
 		entityBody.setGravityScale(0);*/
 	}
 	
-	public void createFly (float a, float b) {
+	public void createTear (int ID) {
+		CircleShape tear = new CircleShape();
+		bdef.type = BodyType.DynamicBody;
+		fdef.shape = tear;
+		fdef.filter.categoryBits = Vars.bENTITY;
+		fdef.filter.maskBits = Vars.bDOOR | Vars.bWALL | Vars.bENTITY | Vars.bROCK;
+		fdef.isSensor = false;
+		
+		bdef.position.set(
+				MainScreen.eManager.player.getPosition().x,
+				MainScreen.eManager.player.getPosition().y);
+		body = MainScreen.world.createBody(bdef);
+		tear.setRadius(x/10/R);
+		body.createFixture(fdef).setUserData("T_" + ID);
+		body.setGravityScale(0);
+	}
+	
+	public void createFly (float a, float b, int ID) {
 		CircleShape fly = new CircleShape();
 		bdef.type = BodyType.DynamicBody;
 		fdef.shape = fly;
@@ -74,19 +94,35 @@ public class DynamicBody {
 		bdef.position.set(X+b/R, Y+a/R);
 		body = MainScreen.world.createBody(bdef);
 		fly.setRadius(x/8/R);
-		body.createFixture(fdef).setUserData("M");
+		body.createFixture(fdef).setUserData("M_" + ID);
 		body.setGravityScale(0);
 	}
-
+	
 	public Vector2 getLinearVelocity () {
-		return this.body.getLinearVelocity();
+		return body.getLinearVelocity();
 	}
 	
 	public void setLinearVelocity (Vector2 v) {
-		this.body.setLinearVelocity(v);
+		body.setLinearVelocity(v);
 	}
 
 	public Vector2 getPosition () {
-		return this.body.getPosition();
+		return body.getPosition();
+	}
+	
+	public void setPosition (Vector2 v) {
+		body.setLinearVelocity(v);
+	}
+	
+	public void destroy () {
+		dead = true;
+	}
+	
+	public void destroyBody () {
+		for (Fixture f : body.getFixtureList()) {
+			body.destroyFixture(f);
+		}
+		body.setUserData(null);
+		body = null;
 	}
 }
