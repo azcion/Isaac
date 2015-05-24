@@ -41,19 +41,76 @@ public class Movement {
 		} else
 		if (Controls.isDown(Controls.W)) {
 			v.y = -Vars.SPEED;
+			if (Controls.isDown(Controls.UP)) {
+				MainScreen.tManager.shoot(0);
+			} else
+			if (Controls.isDown(Controls.LEFT)) {
+				MainScreen.tManager.shoot(1);
+			} else
+			if (Controls.isDown(Controls.DOWN)) {
+				MainScreen.tManager.shoot(2);
+			} else
+			if (Controls.isDown(Controls.RIGHT)) {
+				MainScreen.tManager.shoot(3);
+			}
 		} else
 		if (Controls.isDown(Controls.A)) {
 			v.x = -Vars.SPEED;
+			if (Controls.isDown(Controls.UP)) {
+				MainScreen.tManager.shoot(0);
+			} else
+			if (Controls.isDown(Controls.LEFT)) {
+				MainScreen.tManager.shoot(1);
+			} else
+			if (Controls.isDown(Controls.DOWN)) {
+				MainScreen.tManager.shoot(2);
+			} else
+			if (Controls.isDown(Controls.RIGHT)) {
+				MainScreen.tManager.shoot(3);
+			} 
 		} else
 		if (Controls.isDown(Controls.S)) {
 			v.y = Vars.SPEED;
+			if (Controls.isDown(Controls.UP)) {
+				MainScreen.tManager.shoot(0);
+			} else
+			if (Controls.isDown(Controls.LEFT)) {
+				MainScreen.tManager.shoot(1);
+			} else
+			if (Controls.isDown(Controls.DOWN)) {
+				MainScreen.tManager.shoot(2);
+			} else
+			if (Controls.isDown(Controls.RIGHT)) {
+				MainScreen.tManager.shoot(3);
+			} 
 		} else
 		if (Controls.isDown(Controls.D)) {
 			v.x = Vars.SPEED;
+			if (Controls.isDown(Controls.UP)) {
+				MainScreen.tManager.shoot(0);
+			} else
+			if (Controls.isDown(Controls.LEFT)) {
+				MainScreen.tManager.shoot(1);
+			} else
+			if (Controls.isDown(Controls.DOWN)) {
+				MainScreen.tManager.shoot(2);
+			} else
+			if (Controls.isDown(Controls.RIGHT)) {
+				MainScreen.tManager.shoot(3);
+			} 
+		} else
+		if (Controls.isDown(Controls.UP)) {
+			MainScreen.tManager.shoot(0);
+		} else
+		if (Controls.isDown(Controls.LEFT)) {
+			MainScreen.tManager.shoot(1);
+		} else
+		if (Controls.isDown(Controls.DOWN)) {
+			MainScreen.tManager.shoot(2);
 		} else
 		if (Controls.isDown(Controls.RIGHT)) {
-			MainScreen.tManager.shoot();
-		}
+			MainScreen.tManager.shoot(3);
+		} 
 		
 		user.setLinearVelocity(v);
 	}	

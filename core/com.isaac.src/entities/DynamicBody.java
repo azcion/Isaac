@@ -70,7 +70,7 @@ public class DynamicBody {
 		CircleShape tear = new CircleShape();
 		bdef.type = BodyType.DynamicBody;
 		fdef.shape = tear;
-		fdef.filter.categoryBits = Vars.bENTITY;
+		fdef.filter.categoryBits = Vars.bTEAR;
 		fdef.filter.maskBits = Vars.bDOOR | Vars.bWALL | Vars.bENTITY | Vars.bROCK;
 		fdef.isSensor = false;
 		
@@ -88,7 +88,7 @@ public class DynamicBody {
 		bdef.type = BodyType.DynamicBody;
 		fdef.shape = fly;
 		fdef.filter.categoryBits = Vars.bENTITY;
-		fdef.filter.maskBits = Vars.bDOOR | Vars.bWALL | Vars.bPLAYER | Vars.bENTITY;
+		fdef.filter.maskBits = Vars.bDOOR | Vars.bWALL | Vars.bPLAYER | Vars.bENTITY | Vars.bTEAR;
 		fdef.isSensor = false;
 		
 		bdef.position.set(X+b/R, Y+a/R);

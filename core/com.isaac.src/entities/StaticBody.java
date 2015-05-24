@@ -42,7 +42,7 @@ public class StaticBody {
 		bdef.type = BodyType.StaticBody;
 		fdef.shape = rect;
 		fdef.filter.categoryBits = Vars.bWALL;
-		fdef.filter.maskBits = Vars.bPLAYER | Vars.bENTITY;
+		fdef.filter.maskBits = Vars.bPLAYER | Vars.bENTITY | Vars.bTEAR;
 		fdef.isSensor = false;
 		
 		float[] xCoords = {w/9/R, (w-w/9/2)/R*2, w/2/R, (w-w/2/2)/R*2};
@@ -80,7 +80,7 @@ public class StaticBody {
 		bdef.type = BodyType.StaticBody;
 		fdef.shape = rock;
 		fdef.filter.categoryBits = Vars.bROCK;
-		fdef.filter.maskBits = Vars.bPLAYER | Vars.bENTITY;
+		fdef.filter.maskBits = Vars.bPLAYER | Vars.bENTITY | Vars.bTEAR;
 		fdef.isSensor = false;
 		
 		for (int i = 0; i < 7; ++i) {
@@ -109,12 +109,13 @@ public class StaticBody {
 		fdef.filter.categoryBits = Vars.bDOOR;
 		fdef.isSensor = false;
 		
-		short bitPE = Vars.bPLAYER | Vars.bENTITY;
+		short bitPA = Vars.bENTITY | Vars.bTEAR;
+		short bitPB = Vars.bPLAYER | Vars.bENTITY | Vars.bTEAR;
 		short[] bits = {
-				(u) ? Vars.bENTITY : bitPE,
-				(d) ? Vars.bENTITY : bitPE,
-				(l) ? Vars.bENTITY : bitPE,
-				(r) ? Vars.bENTITY : bitPE
+				(u) ? bitPA : bitPB,
+				(d) ? bitPA : bitPB,
+				(l) ? bitPA : bitPB,
+				(r) ? bitPA : bitPB
 		};
 		float[] xCoords = {w/R, (w-Vars.x*7.2f)/R, (w+Vars.x*7.2f)/R};
 		float[] yCoords = {h/10/R, (h-h/10)/R, h/2/R};

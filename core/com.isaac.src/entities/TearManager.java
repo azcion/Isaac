@@ -17,24 +17,27 @@ public class TearManager {
 	
 	public Array<Tear> tears;
 	public Array<DynamicBody> tearBodies;
-	private Array<Tear> tearsPending;
-	private Array<DynamicBody> tearBodiesRemoval;
 	
 	double delay;
 	double grace;
 	boolean isGrace;
+	private Vector2 vec;
 	
 	int tID;
 	
 	public TearManager () {
 		tears = new Array<Tear>();
 		tearBodies = new Array<DynamicBody>();
-		tearsPending = new Array<Tear>();
-		tearBodiesRemoval = new Array<DynamicBody>();
 		delay = 0.3;
+		vec = new Vector2(0, 0);
 	}
 	
 	public void update () {
+		if (tears.size == 0) {
+			tears.clear();
+			tearBodies.clear();
+			return;
+		}
 		Iterator<DynamicBody> b = tearBodies.iterator();
 		Iterator<Tear> t = tears.iterator();
 		while (t.hasNext()) {
@@ -42,11 +45,9 @@ public class TearManager {
 			DynamicBody body = b.next();
 			//tear.update();
 			if (tear.hit
+					|| System.currentTimeMillis() - tear.born > 750
 					|| body.getLinearVelocity().x != tear.vec.x
 					|| body.getLinearVelocity().y != tear.vec.y
-					//|| System.currentTimeMillis() - tear.born > 750
-					//|| Math.abs(body.getLinearVelocity().x - tear.position.x) > 0
-					//|| Math.abs(body.getLinearVelocity().y - tear.position.y) > 0
 					) {
 				t.remove();
 				b.remove();
@@ -69,7 +70,7 @@ public class TearManager {
 		}
 	}
 	
-	public void shoot () {
+	public void shoot (int b) {
 		if (isGrace) {
 			if (System.currentTimeMillis()/1000. - grace > delay) {
 				isGrace = false;
@@ -77,12 +78,19 @@ public class TearManager {
 			return;
 		}		
 		Tear tear = new Tear(tID);
-		tear.vec = MainScreen.eManager.player.getPosition();
-		//tear.setLinearVelocity(new Vector2(10, 0));
+		//tear.vec = MainScreen.eManager.player.getPosition();
 		
 		DynamicBody tearBody = new DynamicBody();
 		tearBody.createTear(tID);
-		tearBody.setLinearVelocity(new Vector2(10, 0));
+		
+		switch (b) {
+			case 0:    vec.x = 0; vec.y = -10; break;
+			case 1:    vec.x = -10; vec.y = 0; break;
+			case 2:    vec.x = 0; vec.y = 10; break;
+			case 3:    vec.x = 10; vec.y = 0; break;
+		}
+		tearBody.setLinearVelocity(vec);
+		tear.vec = vec;
 		
 		tears.add(tear);
 		tearBodies.add(tearBody);
