@@ -26,7 +26,7 @@ public class DynamicBody {
 	
 	public boolean dead;
 	
-	private Body body;
+	Body body;
 	private static BodyDef bdef = new BodyDef();
 	private static FixtureDef fdef = new FixtureDef();
 	
@@ -122,6 +122,7 @@ public class DynamicBody {
 		for (Fixture f : body.getFixtureList()) {
 			body.destroyFixture(f);
 		}
+		body.getWorld().destroyBody(body);
 		body.setUserData(null);
 		body = null;
 	}

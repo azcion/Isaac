@@ -81,7 +81,7 @@ public class MainScreen implements Screen {
 		Gdx.gl30.glClearColor(0F, 0F, 0F, 1F);
 		Gdx.gl30.glClear(GL30.GL_COLOR_BUFFER_BIT);
 		
-		System.out.println(Gdx.graphics.getFramesPerSecond()); /////////////////////
+		//System.out.println(Gdx.graphics.getFramesPerSecond()); /////////////////////
 		
 		update(1/60f);
 		
