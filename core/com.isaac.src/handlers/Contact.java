@@ -37,10 +37,13 @@ public class Contact implements ContactListener {
 				isGrace = true;
 			} else
 			if (bUD[0].equals("T") && !aUD[0].equals("T")) {
-				//MainScreen.tManager.setHit(Integer.valueOf(bUD[1]));
-				//MainScreen.tManager.clear();
-				/*Entity e = EntityManager.currentRoom.MONSTERS.get(aUD[1]);
-				e.eMONSTER.damage(MainScreen.eManager.PLAYER.ePLAYER.getDamage());
+				if (aUD[0].equals("M")) {
+					EntityManager.currentRoom.monsters.get(Integer.valueOf(aUD[1]))
+							.eMONSTER.damage(MainScreen.eManager.PLAYER.ePLAYER.getDamage()
+					);
+				}
+				/*
+				
 				if (e.eMONSTER.isDead()) {
 					e.body.destroyBody();
 				}

@@ -1,7 +1,10 @@
 package entities;
 
+import graphics.Skin;
+
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import resources.Vars;
 import logic.Monster;
@@ -10,14 +13,19 @@ import logic.Monster;
 
 public class Room {
 	
-	public float X, Y;
 	private StaticBody walls, floor, doors, rocks;
-	public Map<Integer, Entity> MONSTERS = new HashMap<Integer, Entity>();
+	public Map<Integer, Entity> monsters;
+	public Map<Integer, Skin> monsterSkins;
 	
+	public float X, Y;
 	public static int roomMonsterID = 0x00;
+	private Entity ent;
 	
 	
 	public Room (float x, float y) {
+		monsters = new HashMap<Integer, Entity>();
+		monsterSkins = new HashMap<Integer, Skin>();
+		
 		X = x;
 		Y = y;
 		//System.out.printf("%f\t%f\n%f\t%f", X, Y, Vars.x, Vars.y);
@@ -31,10 +39,17 @@ public class Room {
 	}
 	
 	public void update () {
-		createRoom();
+		for (Entry<Integer, Entity> e : monsters.entrySet()) {
+			ent = e.getValue();
+			if (ent.eMONSTER.isDead()) {
+				monsters.remove(e.getKey());
+				ent.body.destroyBody();
+				break;
+			}
+		}
 	}
 	
-	private void createRoom () {
+	public void createRoom () {
 		StaticBody.setCoords(X/2, Y);
 		walls.createWalls();
 		floor.createGround();
@@ -44,13 +59,16 @@ public class Room {
 	
 	public void addMonster (int monsterID, float x, float y) {
 		Entity monster = new Entity(new Monster(monsterID));
-		monster.body.createFly(x, y, roomMonsterID);		////////////////////////////
-		MONSTERS.put(roomMonsterID, monster);
+		monster.body.createFly(x, y, roomMonsterID);
+		monsters.put(roomMonsterID, monster);
+		
+		//Skin monsterSkin = new Skin()
+		
 		++roomMonsterID;
 	}
 	
 	public void idle () {
-		for (Map.Entry<Integer, Entity> i : MONSTERS.entrySet()) {
+		for (Map.Entry<Integer, Entity> i : monsters.entrySet()) {
 			EntityManager.movement.idle(i.getValue().body);
 		}
 	}

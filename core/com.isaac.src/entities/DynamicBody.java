@@ -125,5 +125,6 @@ public class DynamicBody {
 		body.getWorld().destroyBody(body);
 		body.setUserData(null);
 		body = null;
+		dead = true;
 	}
 }

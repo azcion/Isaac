@@ -77,7 +77,11 @@ public class Skin {
 				Assets.sPlayer[0], xc-x/2/R, yc-y/2/R, x/R, y/R);
 	}
 	
-	public void draw () {		
+	public void draw () {
+		if (body.dead) {
+			return;
+		}
+		
 		float xc = body.getPosition().x;
 		float yc = body.getPosition().y;
 		MainScreen.batch.draw(

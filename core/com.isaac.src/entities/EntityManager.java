@@ -30,7 +30,17 @@ public class EntityManager {
 		monsterSkins = new Skin[7][13];
 	}
 	
+	public void update () {
+		Movement.handleInput(player);
+		//Movement.chase();
+		currentRoom.update();
+		currentRoom.idle();
+		
+	}
+	
 	public void setupScene () { //////////////////////////////////////////////
+		currentRoom.createRoom();
+		
 		for (int i = 0; i < MainScreen.rManager.rooms.length; ++i) {
 			MainScreen.rManager.rooms[i].update();
 		}
@@ -53,17 +63,10 @@ public class EntityManager {
 					continue;
 				}
 				currentRoom.addMonster(0x00, Vars.y(i)+45, Vars.x(j)+45); ///////////////////
-				monsterSkins[i][j] = new Skin(currentRoom.MONSTERS.get(flyID).body);
+				monsterSkins[i][j] = new Skin(currentRoom.monsters.get(flyID).body);
 				++flyID;
 			}
 		}
-	}
-	
-	public void update () {
-		Movement.handleInput(player);
-		//Movement.chase();
-		currentRoom.idle();
-		
 	}
 	
 	public void render () {
