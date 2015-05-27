@@ -14,6 +14,7 @@ public class Contact implements ContactListener {
 	
 	double grace;
 	boolean isGrace;
+	String target;
 
 	@Override	// called when two fixtures start to collide
 	public void beginContact (com.badlogic.gdx.physics.box2d.Contact c) {
@@ -35,19 +36,21 @@ public class Contact implements ContactListener {
 				grace = System.currentTimeMillis()/1000.;
 				isGrace = true;
 			} else
-			if (bUD[0].equals("T") && !aUD[0].equals("T")) {
-				if (aUD[0].equals("M")) {
-					EntityManager.currentRoom.monsters.get(Integer.valueOf(aUD[1]))
-							.eMONSTER.damage(MainScreen.eManager.PLAYER.ePLAYER.getDamage()
+			if (aUD[0].equals("T") ^ bUD[0].equals("T")) {
+				if (aUD[0].equals("M") ^ bUD[0].equals("M")) {
+					target = (aUD[0].equals("M")) ? aUD[1] : bUD[1];
+					EntityManager
+							.currentRoom
+							.monsters
+							.get(Integer.valueOf(target))
+							.eMONSTER
+							.damage(MainScreen
+									.eManager
+									.PLAYER
+									.ePLAYER
+									.getDamage()
 					);
 				}
-				/*
-				
-				if (e.eMONSTER.isDead()) {
-					e.body.destroyBody();
-				}
-				EntityManager.currentRoom.MONSTERS.put(Integer.valueOf(aUD[1]), e);
-				System.out.println(e.eMONSTER.getHP());*/
 			}
 		}
 	}

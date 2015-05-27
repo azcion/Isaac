@@ -23,12 +23,12 @@ public class Entity {
 	
 	public void damagePlayer (int damage) {
 		ePLAYER.setHealth(ePLAYER.getHealth().getOrderID(), -damage);
-		
+		/*
 		if (ePLAYER.getHealth().isDead()) {
 			System.out.println(ePLAYER.toString());
 		} else {
 			System.out.println(ePLAYER.getFullHealth());
-		}
+		}*/
 	}
 	
 	public void damageMonster (Monster monster, int damage) {

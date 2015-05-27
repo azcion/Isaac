@@ -49,8 +49,7 @@ public class MainScreen implements Screen {
 		
 		cam = new OrthographicCamera();
 		debugcam = new Box2DDebugRenderer(); ///////////////////////
-		cam.setToOrtho(true, w/(R/2), h/(R/2));//w/R, h/R);
-		cam.translate(-w/(2*R), -h/(2*R));
+		cam.setToOrtho(true, w/R, h/R);
 		cam.update();
 		
 		rManager = new RoomManager(1);	////////////////////////	
@@ -68,9 +67,9 @@ public class MainScreen implements Screen {
 	
 	public void update (float delta) {
 		
-		eManager.update();
-		tManager.update();
 		UserInterface.update();
+		tManager.update();
+		eManager.update();
 		Controls.update();
 		cam.update();
 		

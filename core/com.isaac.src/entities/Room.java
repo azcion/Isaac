@@ -27,9 +27,6 @@ public class Room {
 		
 		X = x;
 		Y = y;
-		//System.out.printf("%f\t%f\n%f\t%f", X, Y, Vars.x, Vars.y);
-		
-		//MainScreen.cam.setToOrtho(true, X, Y);
 		
 		walls = new StaticBody();
 		floor = new StaticBody();
@@ -38,21 +35,14 @@ public class Room {
 	}
 	
 	public void update () {
-		for (Entry<Integer, Entity> e : monsters.entrySet()) {
-			ent = e.getValue();
-			if (ent.eMONSTER.isDead()) {
-				monsters.remove(e.getKey());
-				ent.body.destroyBody();
-				break;
-			}
-		}
+		cleanupBodies();
 	}
 	
 	public void createRoom () {
 		StaticBody.setCoords(X/2, Y);
 		walls.createWalls();
 		floor.createGround();
-		doors.createDoors(false, false, true, true);
+		doors.createDoors(false, false, false, false);
 		rocks.createRocks();
 	}
 	
@@ -60,9 +50,6 @@ public class Room {
 		Entity monster = new Entity(new Monster(monsterID));
 		monster.body.createFly(x, y, roomMonsterID);
 		monsters.put(roomMonsterID, monster);
-		
-		//Skin monsterSkin = new Skin()
-		
 		++roomMonsterID;
 	}
 	
@@ -73,6 +60,13 @@ public class Room {
 	}
 	
 	private void cleanupBodies () {
-		// TODO
+		for (Entry<Integer, Entity> e : monsters.entrySet()) {
+			ent = e.getValue();
+			if (ent.eMONSTER.isDead()) {
+				monsters.remove(e.getKey());
+				ent.body.destroyBody();
+				break;
+			}
+		}
 	}
 }
