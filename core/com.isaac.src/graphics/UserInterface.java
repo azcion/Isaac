@@ -1,10 +1,10 @@
 package graphics;
 
-import entities.EntityManager;
+import static resources.Vars.R;
+import main.MainScreen;
 import resources.Assets;
 import resources.Vars;
-import main.MainScreen;
-import static resources.Vars.R;
+import entities.EntityManager;
 
 
 

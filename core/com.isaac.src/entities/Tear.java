@@ -1,6 +1,5 @@
 package entities;
 
-import resources.Vars;
 import com.badlogic.gdx.math.Vector2;
 
 

@@ -1,16 +1,15 @@
 package entities;
 
+import static resources.Vars.R;
+import main.MainScreen;
 import resources.Assets;
 import resources.Vars;
-import main.MainScreen;
 
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-
-import static resources.Vars.R;
 
 
 

@@ -1,11 +1,11 @@
 package entities;
 
+import graphics.Skin;
+import handlers.Movement;
 import logic.Player;
 import main.MainScreen;
 import resources.Assets;
 import resources.Vars;
-import graphics.Skin;
-import handlers.Movement;
 
 
 

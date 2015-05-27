@@ -2,11 +2,10 @@ package entities;
 
 import graphics.Skin;
 
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
-import resources.Vars;
 import logic.Monster;
 
 

@@ -1,19 +1,19 @@
 package graphics;
 
+import static resources.Vars.R;
+import static resources.Vars.h;
+import static resources.Vars.w;
+import static resources.Vars.x;
+import static resources.Vars.y;
+import main.MainScreen;
 import resources.Assets;
 import resources.Vars;
-import main.MainScreen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 import entities.DynamicBody;
 import entities.EntityManager;
-import static resources.Vars.R;
-import static resources.Vars.h;
-import static resources.Vars.w;
-import static resources.Vars.x;
-import static resources.Vars.y;
 
 
 

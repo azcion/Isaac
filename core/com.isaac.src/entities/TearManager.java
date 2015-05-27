@@ -1,15 +1,9 @@
 package entities;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
-
-import main.MainScreen;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-
-import resources.Vars;
 
 
 
@@ -18,18 +12,17 @@ public class TearManager {
 	public Array<Tear> tears;
 	public Array<DynamicBody> tearBodies;
 	
-	double delay;
-	double grace;
-	boolean isGrace;
+	private double delay;
+	private double grace;
+	private boolean isGrace;
 	private Vector2 vec;
-	
-	int tID;
+	private int tID;
 	
 	public TearManager () {
 		tears = new Array<Tear>();
 		tearBodies = new Array<DynamicBody>();
 		delay = 0.3;
-		vec = new Vector2(0, 0);
+		vec = new Vector2();
 	}
 	
 	public void update () {

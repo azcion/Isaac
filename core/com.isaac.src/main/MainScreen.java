@@ -1,5 +1,13 @@
 package main;
 
+import static resources.Vars.R;
+import static resources.Vars.h;
+import static resources.Vars.w;
+import graphics.Skin;
+import graphics.UserInterface;
+import handlers.Contact;
+import handlers.Controls;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
@@ -12,13 +20,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import entities.EntityManager;
 import entities.RoomManager;
 import entities.TearManager;
-import graphics.Skin;
-import graphics.UserInterface;
-import handlers.Contact;
-import handlers.Controls;
-import static resources.Vars.R;
-import static resources.Vars.h;
-import static resources.Vars.w;
 
 
 public class MainScreen implements Screen {
