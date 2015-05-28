@@ -88,7 +88,7 @@ public class EntityManager {
 	}
 	
 	public void chase (Entity monster) {
-		if (playerBody.body.getPosition().dst2(monster.body.getPosition()) > 15) {
+		if (playerBody.body.getPosition().dst2(monster.body.getPosition()) > 20) {
 			return;
 		}
 		Movement.chase(playerBody, monster.body);

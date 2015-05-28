@@ -12,6 +12,8 @@ import entities.DynamicBody;
 public class Movement {
 	
 	private static double angle;
+	private static double sin;
+	private static double cos;
 	private static Vector2 p;
 	private static Vector2 e;
 	
@@ -99,14 +101,18 @@ public class Movement {
 		p = player.getPosition();
 		e = monster.getPosition();
 		
-		if (Vars.seed.nI(4) != 0) {
-			e.x += (p.x > e.x) ? 0.01 : -0.01;
-			e.y += (p.y > e.y) ? 0.01 : -0.01;
-		} else {
+		if (Vars.seed.nI(4) == 0) {
 			angle = Math.toDegrees(Math.atan2(p.y - e.y, p.x - e.x));
-			e.x += Math.cos(angle) * 0.02;
-			e.y += Math.sin(angle) * 0.02;
+			cos = Math.cos(angle) * 0.02;
+			sin = Math.sin(angle) * 0.02;
+		} else {
+			cos = (p.x > e.x) ? 0.02 : -0.02;
+			sin = (p.y > e.y) ? 0.02 : -0.02;
 		}
+		
+		e.x += cos;
+		e.y += sin;
+		
 		monster.setPosition(e);
 	}
 	
