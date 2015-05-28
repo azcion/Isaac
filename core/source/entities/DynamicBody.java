@@ -108,7 +108,7 @@ public class DynamicBody {
 	}
 	
 	public void setPosition (Vector2 v) {
-		body.setLinearVelocity(v);
+		body.setTransform(v, 0);
 	}
 	
 	public void destroy () {

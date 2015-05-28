@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import logic.Monster;
+import main.MainScreen;
 
 
 
@@ -35,6 +36,10 @@ public class Room {
 	
 	public void update () {
 		cleanupBodies();
+		for (Map.Entry<Integer, Entity> i : monsters.entrySet()) {
+			MainScreen.eManager.buzz(i.getValue());
+			MainScreen.eManager.chase(i.getValue());
+		}
 	}
 	
 	public void createRoom () {
@@ -50,12 +55,6 @@ public class Room {
 		ent.body.createFly(x, y, roomMonsterID);
 		monsters.put(roomMonsterID, ent);
 		++roomMonsterID;
-	}
-	
-	public void idle () {
-		for (Map.Entry<Integer, Entity> i : monsters.entrySet()) {
-			EntityManager.movement.idle(i.getValue().body);
-		}
 	}
 	
 	private void cleanupBodies () {

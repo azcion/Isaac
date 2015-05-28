@@ -1,4 +1,4 @@
-package com.isaac;
+package main;
 
 import main.MainGame;
 

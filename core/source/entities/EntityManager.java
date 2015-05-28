@@ -32,8 +32,6 @@ public class EntityManager {
 	public void update () {
 		Movement.handleInput(playerBody);
 		currentRoom.update();
-		currentRoom.idle();
-		
 	}
 	
 	public void setupScene () { //////////////////////////////////////////////
@@ -83,6 +81,17 @@ public class EntityManager {
 	
 	public void damage (int id) {
 		currentRoom.monsters.get(id).damageMonster(getPlayer().getDamage());
+	}
+	
+	public void buzz (Entity monster) {
+		Movement.buzz(monster.body);
+	}
+	
+	public void chase (Entity monster) {
+		if (playerBody.body.getPosition().dst2(monster.body.getPosition()) > 15) {
+			return;
+		}
+		Movement.chase(playerBody, monster.body);
 	}
 	
 	public Player getPlayer () {
