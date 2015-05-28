@@ -60,133 +60,135 @@ public class Player {
 	private int 	_Luck;
 	private Carry	_Carry;
 	
+	private double p, q, r, s, t, u;
+	
 	public Player () {
 		int c = Vars.CHARACTER;
-		this._Name = __Characters[c];
-		this._Health = new Health(c, __Health[c]);
+		_Name = __Characters[c];
+		_Health = new Health(c, __Health[c]);
 		if (c != 9) {
-			this._Damage = 3.5 * __Damage[c];
-			this._Tears = (__Tears[c] > 0) ? 
+			_Damage = 3.5 * __Damage[c];
+			_Tears = (__Tears[c] > 0) ? 
 					16 - Math.sqrt(1 + __Tears[c] * 1.3) * 6 :
 					16 - __Tears[c] * 6;
-			this._ShotSpeed = __ShotSpeed[c];
-			this._Range = __Range[c] - 0.25;
-			this._Speed = __Speed[c];
-			this._Luck = __Luck[c];
-			this._Carry = new Carry(__StartingPickups[c], __StartingItem[c]);
+			_ShotSpeed = __ShotSpeed[c];
+			_Range = __Range[c] - 0.25;
+			_Speed = __Speed[c];
+			_Luck = __Luck[c];
+			_Carry = new Carry(__StartingPickups[c], __StartingItem[c]);
 		} else {
-			double p = seed.nD(); double q = seed.nD(); double r = seed.nD();
-			double s = seed.nD(); double t = seed.nD(); double u = seed.nD();
-			this._Damage = 3.5 * __Damage[c] + p * 0.58 - 0.29;
-			this._Tears = (__Tears[c] > 0) ?
+			p = seed.nD(); q = seed.nD(); r = seed.nD();
+			s = seed.nD(); t = seed.nD(); u = seed.nD();
+			_Damage = 3.5 * __Damage[c] + p * 0.58 - 0.29;
+			_Tears = (__Tears[c] > 0) ?
 					16 - Math.sqrt(1 + (__Tears[c] + q * 1.4 - 0.7) * 1.3) * 6 :
 					16 - (__Tears[c] + q * 1.4 - 0.7) * 6;
-			this._ShotSpeed = __ShotSpeed[c] + r * 0.5 - 0.25;
-			this._Range = __Range[c] - 0.25 + s * 10 - 5;
-			this._Speed = __Speed[c] + t * 0.4 - 0.2;
-			this._Luck = (u < 0.5) ? ++__Luck[c] : --__Luck[c];
+			_ShotSpeed = __ShotSpeed[c] + r * 0.5 - 0.25;
+			_Range = __Range[c] - 0.25 + s * 10 - 5;
+			_Speed = __Speed[c] + t * 0.4 - 0.2;
+			_Luck = (u < 0.5) ? ++__Luck[c] : --__Luck[c];
 			int[] pu = {(int) ((p+q)/2*3), (int) ((r+s)/2*3), (int) ((t+u)/2*3)};
-			this._Carry = new Carry(pu, __StartingItem[c]);
+			_Carry = new Carry(pu, __StartingItem[c]);
 		}
 	}
 	
 	public void setHealth (int ID, int val) {
-		this._Health.setHealth(ID, val);
+		_Health.setHealth(ID, val);
 	}
 	
 	public void setDamage (double val) {
-		this._Damage += val;
+		_Damage += val;
 	}
 	
 	public void setTears (double val) {
-		this._Tears -= (val > 0) ? Math.sqrt(1 + val * 1.3) * 6 : val * 6;
+		_Tears -= (val > 0) ? Math.sqrt(1 + val * 1.3) * 6 : val * 6;
 	}
 	
 	public void setShotSpeed (double val) {
-		this._ShotSpeed += val;
+		_ShotSpeed += val;
 	}
 	
 	public void setRange (double val) {
-		this._Range += val;
+		_Range += val;
 	}
 	
 	public void setSpeed (double val) {
-		this._Speed += val;
+		_Speed += val;
 	}
 	
 	public void setLuck (int val) {
-		this._Luck += val;
+		_Luck += val;
 	}
 	
 	public void setAll () {
-		this._Health.setHealth(0x09, 1);
-		this._Health.setHealth(0x10, 1);
-		this._Damage++;
-		this._Tears -= Math.sqrt(2.3) * 6;
-		this._ShotSpeed++;
-		this._Range++;
-		this._Speed++;
-		this._Luck++;
+		_Health.setHealth(0x09, 1);
+		_Health.setHealth(0x10, 1);
+		_Damage++;
+		_Tears -= Math.sqrt(2.3) * 6;
+		_ShotSpeed++;
+		_Range++;
+		_Speed++;
+		_Luck++;
 	}
 	
 	public void setBombs (int val) {
-		this._Carry.setBombs(val);
+		_Carry.setBombs(val);
 	}
 	
 	public void setKeys (int val) {
-		this._Carry.setKeys(val);
+		_Carry.setKeys(val);
 	}
 	
 	public void setCoins (int val) {
-		this._Carry.setCoins(val);
+		_Carry.setCoins(val);
 	}
 	
 	public String getName () {
-		return this._Name;
+		return _Name;
 	}
 	
 	public int getFullHealth () {
-		return this._Health.fullHealth();
+		return _Health.fullHealth();
 	}
 	
 	public Health getHealth () {
-		return this._Health;
+		return _Health;
 	}
 	
 	public double getDamage () {
-		return this._Damage;
+		return _Damage;
 	}
 	
 	public double getTears () {
-		return this._Tears;
+		return _Tears;
 	}
 	
 	public double getShotSpeed () {
-		return this._ShotSpeed;
+		return _ShotSpeed;
 	}
 	
 	public double getRange () {
-		return this._Range;
+		return _Range;
 	}
 	
 	public double getSpeed () {
-		return this._Speed;
+		return _Speed;
 	}
 	
 	public int getLuck () {
-		return this._Luck;
+		return _Luck;
 	}
 	
 	public int getBombs () {
-		return this._Carry.getBombs();
+		return _Carry.getBombs();
 	}
 	
 	public int getKeys () {
-		return this._Carry.getKeys();
+		return _Carry.getKeys();
 	}
 	
 	public int getCoins () {
-		return this._Carry.getCoins();
+		return _Carry.getCoins();
 	}
 	
 	public String toString() {
