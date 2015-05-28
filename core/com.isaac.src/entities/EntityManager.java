@@ -31,7 +31,6 @@ public class EntityManager {
 	
 	public void update () {
 		Movement.handleInput(playerBody);
-		//Movement.chase();
 		currentRoom.update();
 		currentRoom.idle();
 		

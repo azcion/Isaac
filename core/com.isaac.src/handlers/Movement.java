@@ -15,14 +15,15 @@ public class Movement {
 		
 	}
 	
-	public static void handleInput (DynamicBody user) {
-		Vector2 v = user.getLinearVelocity();
+	public static void handleInput (DynamicBody body) {
+		Vector2 v = body.getLinearVelocity();
 		
 		v.x = 0;
 		v.y = 0;
 		
-		user.setLinearVelocity(v);
+		body.setLinearVelocity(v);
 		
+		// moving
 		if (Controls.isDown(Controls.W) && Controls.isDown(Controls.A)) {
 			v.x = -Vars.SPEED * 0.8f;
 			v.y = -Vars.SPEED * 0.8f;
@@ -41,64 +42,18 @@ public class Movement {
 		} else
 		if (Controls.isDown(Controls.W)) {
 			v.y = -Vars.SPEED;
-			if (Controls.isDown(Controls.UP)) {
-				MainScreen.tManager.shoot(0);
-			} else
-			if (Controls.isDown(Controls.LEFT)) {
-				MainScreen.tManager.shoot(1);
-			} else
-			if (Controls.isDown(Controls.DOWN)) {
-				MainScreen.tManager.shoot(2);
-			} else
-			if (Controls.isDown(Controls.RIGHT)) {
-				MainScreen.tManager.shoot(3);
-			}
 		} else
 		if (Controls.isDown(Controls.A)) {
 			v.x = -Vars.SPEED;
-			if (Controls.isDown(Controls.UP)) {
-				MainScreen.tManager.shoot(0);
-			} else
-			if (Controls.isDown(Controls.LEFT)) {
-				MainScreen.tManager.shoot(1);
-			} else
-			if (Controls.isDown(Controls.DOWN)) {
-				MainScreen.tManager.shoot(2);
-			} else
-			if (Controls.isDown(Controls.RIGHT)) {
-				MainScreen.tManager.shoot(3);
-			} 
 		} else
 		if (Controls.isDown(Controls.S)) {
 			v.y = Vars.SPEED;
-			if (Controls.isDown(Controls.UP)) {
-				MainScreen.tManager.shoot(0);
-			} else
-			if (Controls.isDown(Controls.LEFT)) {
-				MainScreen.tManager.shoot(1);
-			} else
-			if (Controls.isDown(Controls.DOWN)) {
-				MainScreen.tManager.shoot(2);
-			} else
-			if (Controls.isDown(Controls.RIGHT)) {
-				MainScreen.tManager.shoot(3);
-			} 
 		} else
 		if (Controls.isDown(Controls.D)) {
 			v.x = Vars.SPEED;
-			if (Controls.isDown(Controls.UP)) {
-				MainScreen.tManager.shoot(0);
-			} else
-			if (Controls.isDown(Controls.LEFT)) {
-				MainScreen.tManager.shoot(1);
-			} else
-			if (Controls.isDown(Controls.DOWN)) {
-				MainScreen.tManager.shoot(2);
-			} else
-			if (Controls.isDown(Controls.RIGHT)) {
-				MainScreen.tManager.shoot(3);
-			} 
-		} else
+		}
+		
+		// shooting
 		if (Controls.isDown(Controls.UP)) {
 			MainScreen.tManager.shoot(0);
 		} else
@@ -112,7 +67,7 @@ public class Movement {
 			MainScreen.tManager.shoot(3);
 		} 
 		
-		user.setLinearVelocity(v);
+		body.setLinearVelocity(v);
 	}	
 	
 	public void idle (DynamicBody ent) {
