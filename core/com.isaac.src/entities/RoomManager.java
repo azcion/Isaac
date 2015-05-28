@@ -15,7 +15,7 @@ public class RoomManager {
 	private float X, Y;
 	
 	public RoomManager (int roomCount) {
-		this.count = roomCount;
+		count = roomCount;
 		rooms = new Room[roomCount];
 		
 		X = Vars.w/Vars.R;
@@ -27,7 +27,7 @@ public class RoomManager {
 		for (int i = 0; i < count; ++i) {
 			if (tempC[i]) {
 				rooms[i] = new Room(2*i*X, 0*Y);
-				System.out.printf("X: %f\nY: %f", X, Y);
+				//System.out.printf("X: %f\nY: %f", X, Y);
 			}
 			X += Vars.w;
 		}

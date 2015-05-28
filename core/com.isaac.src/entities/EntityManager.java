@@ -15,23 +15,22 @@ public class EntityManager {
 	
 	public static Room currentRoom;
 	
-	public Entity PLAYER;
-	public DynamicBody player;
+	public Entity playerEntity;
+	public DynamicBody playerBody;
 	
 	private Skin playerSkin;
 	private Skin[][] monsterSkins;
 	
 	public EntityManager () {
-		
 		movement = new Movement();
 		currentRoom = MainScreen.rManager.rooms[0]; /////////////////////
-		PLAYER = new Entity(new Player());
-		player = new DynamicBody();
+		playerEntity = new Entity(new Player());
+		playerBody = new DynamicBody();
 		monsterSkins = new Skin[7][13];
 	}
 	
 	public void update () {
-		Movement.handleInput(player);
+		Movement.handleInput(playerBody);
 		//Movement.chase();
 		currentRoom.update();
 		currentRoom.idle();
@@ -52,8 +51,8 @@ public class EntityManager {
 			DynamicBody.setCoords(MainScreen.roomManager.rooms[i])
 		}*/
 		DynamicBody.setCoords(currentRoom.X/2, currentRoom.Y);
-		player.createPlayer();
-		playerSkin = new Skin(player);
+		playerBody.createPlayer();
+		playerSkin = new Skin(playerBody);
 		
 		// fly
 		int flyID = 0;
@@ -70,16 +69,24 @@ public class EntityManager {
 	}
 	
 	public void render () {
+		// player
 		playerSkin.drawPlayer();
-				
+		
 		// fly
 		for (Skin[] i : monsterSkins) {
 			for (Skin j : i) {
 				if (j != null) {
-					j.draw();
+					j.drawFly();
 				}
 			}
 		}
 	}
 	
+	public void damage (int id) {
+		currentRoom.monsters.get(id).damageMonster(getPlayer().getDamage());
+	}
+	
+	public Player getPlayer () {
+		return playerEntity.PLAYER;
+	}
 }

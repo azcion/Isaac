@@ -68,8 +68,8 @@ public class MainScreen implements Screen {
 	public void update (float delta) {
 		
 		UserInterface.update();
-		tManager.update();
 		eManager.update();
+		tManager.update();
 		Controls.update();
 		cam.update();
 		
@@ -94,6 +94,7 @@ public class MainScreen implements Screen {
 			Skin.drawRocks();
 			
 			eManager.render();
+			tManager.render();
 			
 			UserInterface.render();
 			

@@ -1,5 +1,7 @@
 package entities;
 
+import graphics.Skin;
+
 import java.util.Iterator;
 
 import com.badlogic.gdx.math.Vector2;
@@ -11,16 +13,22 @@ public class TearManager {
 	
 	public Array<Tear> tears;
 	public Array<DynamicBody> tearBodies;
+	private Array<Skin> tearSkins;
 	
 	private double delay;
 	private double grace;
 	private boolean isGrace;
 	private Vector2 vec;
 	private int tID;
+	private Tear tear;
+	private DynamicBody body;
+	private Skin skin;
 	
 	public TearManager () {
 		tears = new Array<Tear>();
 		tearBodies = new Array<DynamicBody>();
+		tearSkins = new Array<Skin>();
+		
 		delay = 0.3;
 		vec = new Vector2();
 	}
@@ -31,12 +39,13 @@ public class TearManager {
 			tearBodies.clear();
 			return;
 		}
-		Iterator<DynamicBody> b = tearBodies.iterator();
 		Iterator<Tear> t = tears.iterator();
+		Iterator<DynamicBody> b = tearBodies.iterator();
+		Iterator<Skin> s = tearSkins.iterator();
 		while (t.hasNext()) {
-			Tear tear = t.next();
-			DynamicBody body = b.next();
-			//tear.update();
+			tear = t.next();
+			body = b.next();
+			skin = s.next();
 			if (tear.hit
 					|| System.currentTimeMillis() - tear.born > 750
 					|| body.getLinearVelocity().x != tear.vec.x
@@ -44,9 +53,16 @@ public class TearManager {
 					) {
 				t.remove();
 				b.remove();
+				s.remove();
 				body.destroyBody();
 				break;
 			}
+		}
+	}
+	
+	public void render () {
+		for (Skin s : tearSkins) {
+			s.drawTear();
 		}
 	}
 	
@@ -70,11 +86,10 @@ public class TearManager {
 			}
 			return;
 		}		
-		Tear tear = new Tear(tID);
-		//tear.vec = MainScreen.eManager.player.getPosition();
-		
-		DynamicBody tearBody = new DynamicBody();
-		tearBody.createTear(tID);
+		tear = new Tear(tID);
+		body = new DynamicBody();
+		skin = new Skin(body);
+		body.createTear(tID);
 		
 		switch (b) {
 			case 0:    vec.x = 0; vec.y = -10; break;
@@ -82,11 +97,12 @@ public class TearManager {
 			case 2:    vec.x = 0; vec.y = 10; break;
 			case 3:    vec.x = 10; vec.y = 0; break;
 		}
-		tearBody.setLinearVelocity(vec);
 		tear.vec = vec;
+		body.setLinearVelocity(vec);
 		
 		tears.add(tear);
-		tearBodies.add(tearBody);
+		tearBodies.add(body);
+		tearSkins.add(skin);
 		
 		grace = System.currentTimeMillis()/1000.;
 		isGrace = true;

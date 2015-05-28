@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
@@ -24,8 +25,8 @@ public class Assets {
 	private static Texture tRockBasement;
 	public static Sprite[] sRock01;
 	
-	
-	
+	private static Texture tTear;
+	public static Sprite sTear;
 	
 	private static Texture tPlayer;
 	public static Sprite[] sPlayer;
@@ -35,7 +36,6 @@ public class Assets {
 	
 	public static boolean[][] monsterMap;
 	public static int[][] monsterMapS;
-	
 	
 	private static Texture tUI_Hearts;
 	public static Sprite[] sUI_Hearts;  // fr, hr nr, s, fs, hs, fd, hd
@@ -72,6 +72,10 @@ public class Assets {
 		}
 		sRock01[4] = new Sprite(tRockBasement, 64, 32, 32, 32);
 		sRock01[4].flip(false, true);
+		
+		// get tears
+		tTear = new Texture(Gdx.files.internal("tear/tears.png"));
+		sTear = new Sprite(tTear, 4*32, 0, 32, 32);
 		
 		// get players
 		tPlayer = new Texture(Gdx.files.internal("char/isaac.png"));

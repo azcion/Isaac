@@ -62,7 +62,7 @@ public class Room {
 	private void cleanupBodies () {
 		for (Entry<Integer, Entity> e : monsters.entrySet()) {
 			ent = e.getValue();
-			if (ent.eMONSTER.isDead()) {
+			if (ent.MONSTER.isDead()) {
 				monsters.remove(e.getKey());
 				ent.body.destroyBody();
 				break;

@@ -32,24 +32,14 @@ public class Contact implements ContactListener {
 					}
 					return;
 				}
-				MainScreen.eManager.PLAYER.damagePlayer(1);
+				MainScreen.eManager.playerEntity.damagePlayer(1);
 				grace = System.currentTimeMillis()/1000.;
 				isGrace = true;
 			} else
 			if (aUD[0].equals("T") ^ bUD[0].equals("T")) {
 				if (aUD[0].equals("M") ^ bUD[0].equals("M")) {
 					target = (aUD[0].equals("M")) ? aUD[1] : bUD[1];
-					EntityManager
-							.currentRoom
-							.monsters
-							.get(Integer.valueOf(target))
-							.eMONSTER
-							.damage(MainScreen
-									.eManager
-									.PLAYER
-									.ePLAYER
-									.getDamage()
-					);
+					MainScreen.eManager.damage(Integer.valueOf(target));
 				}
 			}
 		}

@@ -72,8 +72,8 @@ public class DynamicBody {
 		fdef.isSensor = false;
 		
 		bdef.position.set(
-				MainScreen.eManager.player.getPosition().x,
-				MainScreen.eManager.player.getPosition().y);
+				MainScreen.eManager.playerBody.getPosition().x,
+				MainScreen.eManager.playerBody.getPosition().y);
 		body = MainScreen.world.createBody(bdef);
 		tear.setRadius(x/10/R);
 		body.createFixture(fdef).setUserData("T_" + ID);

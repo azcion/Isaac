@@ -24,6 +24,8 @@ public class Skin {
 	
 	private static float X;
 	private static float Y;
+	private float xc;
+	private float yc;
 	
 	private int pos = 0; ////////////////temporary animation var//////////////
 	
@@ -69,21 +71,29 @@ public class Skin {
 		}
 	}
 	
+	public void drawTear () {
+		xc = body.getPosition().x;
+		yc = body.getPosition().y;
+		
+		MainScreen.batch.draw(
+				Assets.sTear, xc-x/2/R, yc-y/2/R, x/R, y/R);
+	}
+	
 	public void drawPlayer () {
-		float xc = body.getPosition().x;
-		float yc = body.getPosition().y;
+		xc = body.getPosition().x;
+		yc = body.getPosition().y;
 		
 		MainScreen.batch.draw(
 				Assets.sPlayer[0], xc-x/2/R, yc-y/2/R, x/R, y/R);
 	}
 	
-	public void draw () {
+	public void drawFly () {
 		if (body.dead) {
 			return;
 		}
 		
-		float xc = body.getPosition().x;
-		float yc = body.getPosition().y;
+		xc = body.getPosition().x;
+		yc = body.getPosition().y;
 		MainScreen.batch.draw(
 				Assets.sFly[pos], xc-x/2/R, yc-y/2/R, x/R, y/R);
 		
