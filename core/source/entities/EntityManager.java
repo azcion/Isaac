@@ -59,7 +59,7 @@ public class EntityManager {
 					continue;
 				}
 				int monsterType = Assets.monsterMaps[RoomManager.current][i][j]-1;
-				currentRoom.addMonster(monsterType, Vars.y(i)+45, Vars.x(j)+45);
+				currentRoom.addMonster(monsterType, Vars.y(i)+45, Vars.x(j)+45, i, j);
 				monsterSkins[i][j] = new Skin(currentRoom.monsters.get(monsterID).body, monsterType);
 				++monsterID;
 			}

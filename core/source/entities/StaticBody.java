@@ -96,18 +96,13 @@ public class StaticBody {
 		
 		for (int i = 0; i < 7; ++i) {
 			for (int j = 0; j < 13; ++j) {
-				
 				if (Assets.rockMaps[RoomManager.current][i][j] == -1) {
 					continue;
 				}
-				
-				bdef.position.set(
-						X+(Vars.x(j)+Vars.x/2)/R, 
-						Y+(Vars.y(i)+Vars.y/2)/R);
+				bdef.position.set(X+(Vars.x(j)+Vars.x/2)/R, Y+(Vars.y(i)+Vars.y/2)/R);
 				body = MainScreen.world.createBody(bdef);
 				rock.setAsBox((Vars.x/2-Vars.x/10)/R, (Vars.y/2-Vars.y/10)/R);
-				body.createFixture(fdef).setUserData(
-						String.format("R_%d_%d", i, j)); /////
+				body.createFixture(fdef).setUserData(String.format("R_%d_%d", i, j)); /////
 			}
 		}
 	}

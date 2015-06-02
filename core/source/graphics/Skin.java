@@ -75,7 +75,8 @@ public class Skin {
 						case 3: rock = Assets.sRock01[4]; break;
 					}
 					MainScreen.batch.draw(
-							rock, X+Vars.x(j)/R, Y+Vars.y(i)/R, x/R, y/R);
+							rock, X+Vars.x(j)/R-0.1f, Y+Vars.y(i)/R-0.1f,
+							x/R+0.2f, y/R+0.2f);
 				}
 			}
 		}

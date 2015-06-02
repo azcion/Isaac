@@ -7,6 +7,7 @@ public class Vars {
 	
 	public static Seed seed;
 	public static final int CHARACTER = 0; ///////////////////////
+	public static final int MAPS = 4;
 	
 // pixels per meter
 	public static final float R = 64;

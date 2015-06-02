@@ -1,7 +1,6 @@
 package entities;
 
 import graphics.Skin;
-import handlers.Movement;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -56,7 +55,7 @@ public class Room {
 		rocks.createRocks();
 	}
 	
-	public void addMonster (int monsterID, float x, float y) {
+	public void addMonster (int monsterID, float x, float y, int i, int j) {
 		ent = new Entity(new Monster(monsterID));
 		
 		switch (monsterID) {
@@ -65,6 +64,7 @@ public class Room {
 				break;
 			case 0x01:
 				ent.body.createRedBoomFly(x, y, roomMonsterID);
+				ent.MONSTER.setDirection((j < 7) ? (i < 4) ? 5 : 3 : (i < 4) ? 7 : 1);
 				break;
 		}
 		monsters.put(roomMonsterID, ent);
