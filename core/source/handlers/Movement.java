@@ -15,45 +15,43 @@ public class Movement {
 	private static double angle;
 	private static double sin;
 	private static double cos;
-	private static Vector2 p;
-	private static Vector2 e;
 	
-	public static void handleInput (DynamicBody player) {
-		p = player.getLinearVelocity();
-		
+	public static void handleInput (Entity playerEntity, DynamicBody playerBody) {
+		Vector2 p = new Vector2();
 		p.x = 0;
 		p.y = 0;
+		float speed = playerEntity.PLAYER.getSpeed();
 		
-		player.setLinearVelocity(p);
+		playerBody.setLinearVelocity(p);
 		
 		// moving
 		if (Controls.isDown(Controls.W) && Controls.isDown(Controls.A)) {
-			p.x = -Vars.SPEED * 0.8f;
-			p.y = -Vars.SPEED * 0.8f;
+			p.x = -speed * 0.8f;
+			p.y = -speed * 0.8f;
 		} else
 		if (Controls.isDown(Controls.W) && Controls.isDown(Controls.D)) {
-			p.x =  Vars.SPEED * 0.8f;
-			p.y = -Vars.SPEED * 0.8f;
+			p.x =  speed * 0.8f;
+			p.y = -speed * 0.8f;
 		} else
 		if (Controls.isDown(Controls.S) && Controls.isDown(Controls.A)) {
-			p.x = -Vars.SPEED * 0.8f;
-			p.y =  Vars.SPEED * 0.8f;
+			p.x = -speed * 0.8f;
+			p.y =  speed * 0.8f;
 		} else
 		if (Controls.isDown(Controls.S) && Controls.isDown(Controls.D)) {
-			p.x =  Vars.SPEED * 0.8f;
-			p.y =  Vars.SPEED * 0.8f;
+			p.x =  speed * 0.8f;
+			p.y =  speed * 0.8f;
 		} else
 		if (Controls.isDown(Controls.W)) {
-			p.y = -Vars.SPEED;
+			p.y = -speed;
 		} else
 		if (Controls.isDown(Controls.A)) {
-			p.x = -Vars.SPEED;
+			p.x = -speed;
 		} else
 		if (Controls.isDown(Controls.S)) {
-			p.y =  Vars.SPEED;
+			p.y =  speed;
 		} else
 		if (Controls.isDown(Controls.D)) {
-			p.x =  Vars.SPEED;
+			p.x =  speed;
 		}
 		
 		// shooting
@@ -70,92 +68,95 @@ public class Movement {
 			MainScreen.tManager.shoot(3);
 		} 
 		
-		player.setLinearVelocity(p);
+		playerBody.setLinearVelocity(p);
 	}
 	
 	public static void linear (Entity ent) {
-		e = ent.body.getLinearVelocity();
+		Vector2 e = new Vector2();
+		float speed = ent.MONSTER.getSpeed();
 		
 		switch (ent.MONSTER.getDirection()) {
 			case 0:
-				e.x =  ent.MONSTER.getSpeed();
+				e.x =  speed;
 				e.y =  0;
 				break;
 			case 1:
-				e.x =  ent.MONSTER.getSpeed() * 0.8f;
-				e.y =  ent.MONSTER.getSpeed() * 0.8f;
+				e.x =  speed * 0.8f;
+				e.y =  speed * 0.8f;
 				break;
 			case 2:
 				e.x =  0;
-				e.y =  ent.MONSTER.getSpeed();
+				e.y =  speed;
 				break;
 			case 3:
-				e.x = -ent.MONSTER.getSpeed() * 0.8f;
-				e.y =  ent.MONSTER.getSpeed() * 0.8f;
+				e.x = -speed * 0.8f;
+				e.y =  speed * 0.8f;
 				break;
 			case 4:
-				e.x = -ent.MONSTER.getSpeed();
+				e.x = -speed;
 				e.y =  0;
 				break;
 			case 5:
-				e.x = -ent.MONSTER.getSpeed() * 0.8f;
-				e.y = -ent.MONSTER.getSpeed() * 0.8f;
+				e.x = -speed * 0.8f;
+				e.y = -speed * 0.8f;
 				break;
 			case 6:
 				e.x =  0;
-				e.y = -ent.MONSTER.getSpeed();
+				e.y = -speed;
 				break;
 			case 7:
-				e.x =  ent.MONSTER.getSpeed() * 0.8f;
-				e.y = -ent.MONSTER.getSpeed() * 0.8f;
+				e.x =  speed * 0.8f;
+				e.y = -speed * 0.8f;
 				break;
 		}
 		
 		ent.body.setLinearVelocity(e);
 	}
 	
-	public static void buzz (DynamicBody monster) {
-		e = monster.getLinearVelocity();
+	public static void buzz (Entity ent) {
+		Vector2 e = new Vector2();
+		float speed = ent.MONSTER.getSpeed();
 		
 		switch (Vars.seed.nI(4)) {
 			case 0:
-				e.x =  Vars.AFS;
-				e.y =  Vars.AFS;
+				e.x =  speed;
+				e.y =  speed;
 				break;
 			case 1:
-				e.x =  Vars.AFS;
-				e.y = -Vars.AFS;
+				e.x =  speed;
+				e.y = -speed;
 				break;
 			case 2:
-				e.x = -Vars.AFS;
-				e.y =  Vars.AFS;
+				e.x = -speed;
+				e.y =  speed;
 				break;
 			case 3:
-				e.x = -Vars.AFS;
-				e.y = -Vars.AFS;
+				e.x = -speed;
+				e.y = -speed;
 				break;
 		}
 		
-		monster.setLinearVelocity(e);
+		ent.body.setLinearVelocity(e);
 	}
 	
-	public static void chase (DynamicBody player, DynamicBody monster) {
-		p = player.getPosition();
-		e = monster.getPosition();
+	public static void chase (DynamicBody player, Entity monster) {
+		Vector2 p = player.getPosition();
+		Vector2 e = monster.body.getPosition();
+		float speed = monster.MONSTER.getSpeed()/Vars.R;
 		
 		if (Vars.seed.nI(4) == 0) {
 			angle = Math.toDegrees(Math.atan2(p.y - e.y, p.x - e.x));
-			cos = Math.cos(angle) * 0.02;
-			sin = Math.sin(angle) * 0.02;
+			cos = Math.cos(angle) * speed;
+			sin = Math.sin(angle) * speed;
 		} else {
-			cos = (p.x > e.x) ? 0.02 : -0.02;
-			sin = (p.y > e.y) ? 0.02 : -0.02;
+			cos = (p.x > e.x) ? speed : -speed;
+			sin = (p.y > e.y) ? speed : -speed;
 		}
 		
 		e.x += cos;
 		e.y += sin;
 		
-		monster.setPosition(e);
+		monster.body.setPosition(e);
 	}
 	
 }

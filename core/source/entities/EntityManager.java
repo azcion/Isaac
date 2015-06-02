@@ -11,8 +11,6 @@ import resources.Vars;
 
 
 public class EntityManager {
-		
-	static Movement movement;
 	
 	public static Room currentRoom;
 	
@@ -23,7 +21,6 @@ public class EntityManager {
 	private Skin[][] monsterSkins;
 	
 	public EntityManager () {
-		movement = new Movement();
 		currentRoom = MainScreen.rManager.rooms[0]; /////////////////////
 		playerEntity = new Entity(new Player());
 		playerBody = new DynamicBody();
@@ -31,7 +28,7 @@ public class EntityManager {
 	}
 	
 	public void update () {
-		Movement.handleInput(playerBody);
+		Movement.handleInput(playerEntity, playerBody);
 		currentRoom.update();
 	}
 	
@@ -89,14 +86,14 @@ public class EntityManager {
 	}
 	
 	public void buzz (Entity monster) {
-		Movement.buzz(monster.body);
+		Movement.buzz(monster);
 	}
 	
 	public void chase (Entity monster) {
 		if (playerBody.body.getPosition().dst2(monster.body.getPosition()) > 20) {
 			return;
 		}
-		Movement.chase(playerBody, monster.body);
+		Movement.chase(playerBody, monster);
 	}
 	
 	public Player getPlayer () {

@@ -21,11 +21,6 @@ public class Vars {
 	public static final short bENTITY = 32; // 0000 0000 0010 0000
 	public static final short bTEAR = 64;   // 0000 0000 0100 0000
 	
-// limits
-	public static float SPEED = 5;
-	
-	public static float AFS = 1;
-	
 // window
 	public static int w = Gdx.graphics.getWidth();
 	public static int h = Gdx.graphics.getHeight();

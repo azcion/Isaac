@@ -73,7 +73,7 @@ public class Player {
 					16 - __Tears[c] * 6;
 			_ShotSpeed = __ShotSpeed[c];
 			_Range = __Range[c] - 0.25;
-			_Speed = __Speed[c];
+			_Speed = __Speed[c] * 5;
 			_Luck = __Luck[c];
 			_Carry = new Carry(__StartingPickups[c], __StartingItem[c]);
 		} else {
@@ -155,24 +155,24 @@ public class Player {
 		return _Health;
 	}
 	
-	public double getDamage () {
-		return _Damage;
+	public float getDamage () {
+		return (float) _Damage;
 	}
 	
-	public double getTears () {
-		return _Tears;
+	public float getTears () {
+		return (float) _Tears;
 	}
 	
-	public double getShotSpeed () {
-		return _ShotSpeed;
+	public float getShotSpeed () {
+		return (float) _ShotSpeed;
 	}
 	
-	public double getRange () {
-		return _Range;
+	public float getRange () {
+		return (float) _Range;
 	}
 	
-	public double getSpeed () {
-		return _Speed;
+	public float getSpeed () {
+		return (float) _Speed;
 	}
 	
 	public int getLuck () {

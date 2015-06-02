@@ -32,23 +32,20 @@ public class UserInterface {
 		UserInterface.X = EntityManager.currentRoom.X / 2;
 		UserInterface.Y = EntityManager.currentRoom.Y;
 		
-		health = MainScreen.eManager.playerEntity.PLAYER.getHealth().fullHealth();
-		order = MainScreen.eManager.playerEntity.PLAYER.getHealth().getOrder();
+		health = MainScreen.eManager.getPlayer().getHealth().fullHealth();
+		order =MainScreen.eManager.getPlayer().getHealth().getOrder();
 		
 		fullRed  = order[1];
 		fullSoul = order[2];
 		fullDark = order[3];
 		
-		coins = MainScreen.eManager.playerEntity.PLAYER.getCoins();
-		bombs = MainScreen.eManager.playerEntity.PLAYER.getBombs();
-		keys  = MainScreen.eManager.playerEntity.PLAYER.getKeys();
+		coins = MainScreen.eManager.getPlayer().getCoins();
+		bombs = MainScreen.eManager.getPlayer().getBombs();
+		keys  = MainScreen.eManager.getPlayer().getKeys();
 	}
 	
 	public static void render () {
-		float height = Vars.y/2;
-		
-		//fullRed = 4; fullSoul = 2; fullDark = 1;
-		
+		float height = Vars.y/2;		
 		int i = 0;
 		while (i < fullRed) {
 			if (i == 5) height += Vars.y*0.5;
@@ -66,7 +63,7 @@ public class UserInterface {
 					44/R, 44/R);
 			++i;
 		}
-		while (i < fullDark + fullSoul + fullRed) {
+		while (i < fullDark + fullSoul + fullRed) {;
 			if (i == 5) height += Vars.y*0.5;
 			MainScreen.batch.draw(
 					Assets.sUI_Hearts[6], 

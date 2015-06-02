@@ -70,12 +70,12 @@ public class Health {
 	}
 	
 	public void trimHealth () {
-		while (fullHealth() > 12) {
+		while (fullHealth() > 10) {
 			if (this.Order[3] > 0) {--this.DarkHeart;
 			} else
 			if (this.Order[2] > 0) {--this.SoulHeart;
 			} else
-			if (this.Order[0] > 12) {--this.Container;
+			if (this.Order[0] > 10) {--this.Container;
 			} else
 			if (this.Order[1] > 1) {--this.RedHeart;
 			}
