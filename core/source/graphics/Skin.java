@@ -22,6 +22,8 @@ public class Skin {
 	protected DynamicBody body;
 	protected Assets assets;
 	
+	private int monsterType;
+	
 	private static float X;
 	private static float Y;
 	private float xc;
@@ -31,6 +33,13 @@ public class Skin {
 	
 	public Skin (DynamicBody ent) {
 		this.body = ent;
+		X = EntityManager.currentRoom.X/2;
+		Y = EntityManager.currentRoom.Y;
+	}
+	
+	public Skin (DynamicBody ent, int monsterType) {
+		this.body = ent;
+		this.monsterType = monsterType;
 		X = EntityManager.currentRoom.X/2;
 		Y = EntityManager.currentRoom.Y;
 	}
@@ -87,18 +96,22 @@ public class Skin {
 				Assets.sPlayer[0], xc-x/2/R, yc-y/2/R, x/R, y/R);
 	}
 	
-	public void drawFly () {
+	public void drawMonster () {
 		if (body.dead) {
 			return;
 		}
-		
 		xc = body.getPosition().x;
 		yc = body.getPosition().y;
-		MainScreen.batch.draw(
-				Assets.sFly[pos], xc-x/2/R, yc-y/2/R, x/R, y/R);
 		
-		// temporary animation thingy
-		pos = (Gdx.graphics.getDeltaTime() % 0.25 < 1/15f) ? (pos == 3) ? 0 : pos+1 : pos;
+		switch (monsterType) {
+		case 0:
+			MainScreen.batch.draw(Assets.sAttackFly[pos], xc-x/2/R, yc-y/2/R, x/R, y/R);
+			pos = (Gdx.graphics.getDeltaTime() % 0.25 < 1/20f) ? (pos == 3) ? 0 : pos+1 : pos;
+			break;
+		case 1:
+			MainScreen.batch.draw(Assets.sRedBoomFly[pos], xc-x/2/R, yc-y/2/R, x/R, y/R);
+			pos = (Gdx.graphics.getDeltaTime() % 0.25 < 1/50f) ? (pos == 1) ? 0 : 1 : 0;
+			break;
+		}
 	}
-	
 }

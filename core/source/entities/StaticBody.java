@@ -48,15 +48,27 @@ public class StaticBody {
 		float[] yCoords = {h/2/2/R, (h-h/2/2)/R, h/6/2/R, (h-h/6/2)/R};
 		int[] xc = {0, 1, 0, 1, 2, 2, 3, 3}; // index of x coordinates
 		int[] yc = {0, 0, 1, 1, 2, 3, 2, 3}; // index of y coordinates
+		int side = 0;
 		
 		for (int i = 0; i < 8; ++i) {
 			switch (i) {
-			case 0:    rect.setAsBox(w/9/R, (h/2/2-Vars.x*0.73f)/R); break;
-			case 4:    rect.setAsBox((w/2/2-Vars.x*0.73f)/R*2.5f, h/6/2/R); break;
+			case 0:
+				rect.setAsBox(w/9/R, (h/2/2-Vars.x*0.73f)/R);
+				break;
+			case 2:
+				side = 1;
+				break;
+			case 4:
+				rect.setAsBox((w/2/2-Vars.x*0.73f)/R*2.5f, h/6/2/R);
+				side = 2;
+				break;
+			case 6:
+				side = 3;
+				break;
 			}
 			bdef.position.set(X+xCoords[yc[i]], Y+yCoords[xc[i]]);
 			body = MainScreen.world.createBody(bdef);
-			body.createFixture(fdef).setUserData("W");
+			body.createFixture(fdef).setUserData("W_" + side);
 		}
 	}
 	
@@ -120,7 +132,7 @@ public class StaticBody {
 		float[] yCoords = {h/10/R, (h-h/10)/R, h/2/R};
 		int[] xc = {0, 0, 1, 2};
 		int[] yc = {0, 1, 2, 2};
-		String[] UD = {"U", "D", "L", "R"};
+		int[] UD = {2, 3, 0, 1};
 		
 		for (int i = 0; i < 4; ++i) {
 			fdef.filter.maskBits = bits[i];

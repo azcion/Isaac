@@ -31,8 +31,11 @@ public class Assets {
 	private static Texture tPlayer;
 	public static Sprite[] sPlayer;
 	
-	private static Texture tFly;
-	public static Sprite[] sFly;
+	private static Texture tAttackFly;
+	public static Sprite[] sAttackFly;
+	
+	private static Texture tRedBoomFly;
+	public static Sprite[] sRedBoomFly;
 	
 	public static boolean[][] monsterMap;
 	public static int[][] monsterMapS;
@@ -86,14 +89,23 @@ public class Assets {
 			sPlayer[i].flip(false, true);
 		}
 		
-		// get fly
-		tFly = new Texture(Gdx.files.internal("monster/010_fly.png"));
-		sFly = new Sprite[4];
+		// get attack fly
+		tAttackFly = new Texture(Gdx.files.internal("monster/010_fly.png"));
+		sAttackFly = new Sprite[4];
 		
 		for (int i = 0; i < 4; ++i) {
-			sFly[i] = new Sprite(tFly, i*32, 32, 32, 32);
-			sFly[i].flip(false, true);
+			sAttackFly[i] = new Sprite(tAttackFly, i*32, 32, 32, 32);
+			sAttackFly[i].flip(false, true);
 		}
+		
+		// get red boom fly
+		tRedBoomFly = new Texture(Gdx.files.internal("monster/020_redboomfly.png"));
+		sRedBoomFly = new Sprite[2];
+		
+		sRedBoomFly[0] = new Sprite(tRedBoomFly, 0, 0, 32, 32);
+		sRedBoomFly[1] = new Sprite(tRedBoomFly, 32, 0, 32, 32);
+		sRedBoomFly[0].flip(false, true);
+		sRedBoomFly[1].flip(false, true);
 		
 		// get UI hearts
 		tUI_Hearts = new Texture(Gdx.files.internal("ui/hearts.png"));

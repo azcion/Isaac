@@ -1,6 +1,7 @@
 package entities;
 
 import graphics.Skin;
+import handlers.Movement;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,8 +38,13 @@ public class Room {
 	public void update () {
 		cleanupBodies();
 		for (Map.Entry<Integer, Entity> i : monsters.entrySet()) {
-			MainScreen.eManager.buzz(i.getValue());
-			MainScreen.eManager.chase(i.getValue());
+			Entity ent = i.getValue();
+			if (ent.MONSTER.ai()) {
+				MainScreen.eManager.buzz(ent);
+				MainScreen.eManager.chase(ent);
+			} else {
+				MainScreen.eManager.linear(ent, ent.MONSTER.getDirection());
+			}
 		}
 	}
 	
@@ -52,7 +58,15 @@ public class Room {
 	
 	public void addMonster (int monsterID, float x, float y) {
 		ent = new Entity(new Monster(monsterID));
-		ent.body.createFly(x, y, roomMonsterID);
+		
+		switch (monsterID) {
+			case 0x00:
+				ent.body.createAttackFly(x, y, roomMonsterID);
+				break;
+			case 0x01:
+				ent.body.createRedBoomFly(x, y, roomMonsterID);
+				break;
+		}
 		monsters.put(roomMonsterID, ent);
 		++roomMonsterID;
 	}

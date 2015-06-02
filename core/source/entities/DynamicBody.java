@@ -45,6 +45,7 @@ public class DynamicBody {
 		fdef.filter.categoryBits = Vars.bPLAYER;
 		fdef.filter.maskBits = Vars.bDOOR | Vars.bWALL | Vars.bROCK | Vars.bENTITY;
 		fdef.isSensor = false;
+		fdef.restitution = 0;
 		
 		bdef.position.set(X+w/2/R, Y+(h/2+x/2)/R);
 		body = MainScreen.world.createBody(bdef);
@@ -70,6 +71,7 @@ public class DynamicBody {
 		fdef.filter.categoryBits = Vars.bTEAR;
 		fdef.filter.maskBits = Vars.bDOOR | Vars.bWALL | Vars.bENTITY | Vars.bROCK;
 		fdef.isSensor = false;
+		fdef.restitution = 0;
 		
 		bdef.position.set(
 				MainScreen.eManager.playerBody.getPosition().x,
@@ -80,17 +82,34 @@ public class DynamicBody {
 		body.setGravityScale(0);
 	}
 	
-	public void createFly (float a, float b, int ID) {
+	public void createAttackFly (float a, float b, int ID) {
 		CircleShape fly = new CircleShape();
 		bdef.type = BodyType.DynamicBody;
 		fdef.shape = fly;
 		fdef.filter.categoryBits = Vars.bENTITY;
 		fdef.filter.maskBits = Vars.bDOOR | Vars.bWALL | Vars.bPLAYER | Vars.bENTITY | Vars.bTEAR;
 		fdef.isSensor = false;
+		fdef.restitution = 0;
 		
 		bdef.position.set(X+b/R, Y+a/R);
 		body = MainScreen.world.createBody(bdef);
 		fly.setRadius(x/8/R);
+		body.createFixture(fdef).setUserData("M_" + ID);
+		body.setGravityScale(0);
+	}
+	
+	public void createRedBoomFly (float a, float b, int ID) {
+		CircleShape fly = new CircleShape();
+		bdef.type = BodyType.DynamicBody;
+		fdef.shape = fly;
+		fdef.filter.categoryBits = Vars.bENTITY;
+		fdef.filter.maskBits = Vars.bDOOR | Vars.bWALL | Vars.bPLAYER | Vars.bENTITY | Vars.bTEAR;
+		fdef.isSensor = false;
+		fdef.restitution = 0;
+		
+		bdef.position.set(X+b/R, Y+a/R);
+		body = MainScreen.world.createBody(bdef);
+		fly.setRadius(x/4/R);
 		body.createFixture(fdef).setUserData("M_" + ID);
 		body.setGravityScale(0);
 	}

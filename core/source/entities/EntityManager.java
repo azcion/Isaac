@@ -2,6 +2,7 @@ package entities;
 
 import graphics.Skin;
 import handlers.Movement;
+import logic.Monster;
 import logic.Player;
 import main.MainScreen;
 import resources.Assets;
@@ -51,16 +52,16 @@ public class EntityManager {
 		playerBody.createPlayer();
 		playerSkin = new Skin(playerBody);
 		
-		// fly
-		int flyID = 0;
+		int monsterID = 0;
 		for (int i = 0; i < 7; ++i) {
 			for (int j = 0; j < 13; ++j) {
 				if (!Assets.monsterMap[i][j]) {
 					continue;
 				}
-				currentRoom.addMonster(0x00, Vars.y(i)+45, Vars.x(j)+45); ///////////////////
-				monsterSkins[i][j] = new Skin(currentRoom.monsters.get(flyID).body);
-				++flyID;
+				int monsterType = Assets.monsterMapS[i][j]-1;
+				currentRoom.addMonster(monsterType, Vars.y(i)+45, Vars.x(j)+45);
+				monsterSkins[i][j] = new Skin(currentRoom.monsters.get(monsterID).body, monsterType);
+				++monsterID;
 			}
 		}
 	}
@@ -73,7 +74,7 @@ public class EntityManager {
 		for (Skin[] i : monsterSkins) {
 			for (Skin j : i) {
 				if (j != null) {
-					j.drawFly();
+					j.drawMonster();
 				}
 			}
 		}
@@ -81,6 +82,10 @@ public class EntityManager {
 	
 	public void damage (int id) {
 		currentRoom.monsters.get(id).damageMonster(getPlayer().getDamage());
+	}
+	
+	public void linear (Entity monster, int direction) {
+		Movement.linear(monster);
 	}
 	
 	public void buzz (Entity monster) {
@@ -96,5 +101,13 @@ public class EntityManager {
 	
 	public Player getPlayer () {
 		return playerEntity.PLAYER;
+	}
+	
+	public Monster getMonster (int id) {
+		return currentRoom.monsters.get(id).MONSTER;
+	}
+	
+	public Monster getMonster (String id) {
+		return getMonster(Integer.parseInt(id));
 	}
 }

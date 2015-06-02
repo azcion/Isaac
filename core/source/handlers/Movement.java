@@ -6,6 +6,7 @@ import resources.Vars;
 import com.badlogic.gdx.math.Vector2;
 
 import entities.DynamicBody;
+import entities.Entity;
 
 
 
@@ -70,7 +71,48 @@ public class Movement {
 		} 
 		
 		player.setLinearVelocity(p);
-	}	
+	}
+	
+	public static void linear (Entity ent) {
+		e = ent.body.getLinearVelocity();
+		
+		switch (ent.MONSTER.getDirection()) {
+			case 0:
+				e.x =  ent.MONSTER.getSpeed();
+				e.y =  0;
+				break;
+			case 1:
+				e.x =  ent.MONSTER.getSpeed() * 0.8f;
+				e.y =  ent.MONSTER.getSpeed() * 0.8f;
+				break;
+			case 2:
+				e.x =  0;
+				e.y =  ent.MONSTER.getSpeed();
+				break;
+			case 3:
+				e.x = -ent.MONSTER.getSpeed() * 0.8f;
+				e.y =  ent.MONSTER.getSpeed() * 0.8f;
+				break;
+			case 4:
+				e.x = -ent.MONSTER.getSpeed();
+				e.y =  0;
+				break;
+			case 5:
+				e.x = -ent.MONSTER.getSpeed() * 0.8f;
+				e.y = -ent.MONSTER.getSpeed() * 0.8f;
+				break;
+			case 6:
+				e.x =  0;
+				e.y = -ent.MONSTER.getSpeed();
+				break;
+			case 7:
+				e.x =  ent.MONSTER.getSpeed() * 0.8f;
+				e.y = -ent.MONSTER.getSpeed() * 0.8f;
+				break;
+		}
+		
+		ent.body.setLinearVelocity(e);
+	}
 	
 	public static void buzz (DynamicBody monster) {
 		e = monster.getLinearVelocity();
