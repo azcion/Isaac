@@ -97,7 +97,7 @@ public class StaticBody {
 		for (int i = 0; i < 7; ++i) {
 			for (int j = 0; j < 13; ++j) {
 				
-				if (!Assets.rockMap[i][j]) {
+				if (!Assets.rockMaps[RoomManager.current][i][j]) {
 					continue;
 				}
 				

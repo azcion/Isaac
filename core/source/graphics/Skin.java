@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 import entities.DynamicBody;
 import entities.EntityManager;
+import entities.RoomManager;
 
 
 
@@ -66,8 +67,8 @@ public class Skin {
 		Sprite rock = null;
 		for (int i = 0; i < 7; ++i) {
 			for (int j = 0; j < 13; ++j) {
-				if (Assets.rockMap[i][j]) {
-					switch (Assets.rockMapS[i][j]) {
+				if (Assets.rockMaps[RoomManager.current][i][j]) {
+					switch (Assets.rockMapsS[RoomManager.current][i][j]) {
 						case 0: rock = Assets.sRock01[0]; break;
 						case 1: rock = Assets.sRock01[1]; break;
 						case 2: rock = Assets.sRock01[2]; break;
@@ -84,16 +85,14 @@ public class Skin {
 		xc = body.getPosition().x;
 		yc = body.getPosition().y;
 		
-		MainScreen.batch.draw(
-				Assets.sTear, xc-x/2/R, yc-y/2/R, x/R, y/R);
+		MainScreen.batch.draw(Assets.sTear, xc-x/2/R, yc-y/2/R, x/R, y/R);
 	}
 	
 	public void drawPlayer () {
 		xc = body.getPosition().x;
 		yc = body.getPosition().y;
 		
-		MainScreen.batch.draw(
-				Assets.sPlayer[0], xc-x/2/R, yc-y/2/R, x/R, y/R);
+		MainScreen.batch.draw(Assets.sPlayer[0], xc-x/2/R, yc-y/2/R, x/R, y/R);
 	}
 	
 	public void drawMonster () {
@@ -106,11 +105,11 @@ public class Skin {
 		switch (monsterType) {
 		case 0:
 			MainScreen.batch.draw(Assets.sAttackFly[pos], xc-x/2/R, yc-y/2/R, x/R, y/R);
-			pos = (Gdx.graphics.getDeltaTime() % 0.25 < 1/20f) ? (pos == 3) ? 0 : pos+1 : pos;
+			pos += (Gdx.graphics.getDeltaTime() % 0.25 < 1/50f) ? (pos == 3) ? -3 : 1 : 0;
 			break;
 		case 1:
 			MainScreen.batch.draw(Assets.sRedBoomFly[pos], xc-x/2/R, yc-y/2/R, x/R, y/R);
-			pos = (Gdx.graphics.getDeltaTime() % 0.25 < 1/50f) ? (pos == 1) ? 0 : 1 : 0;
+			pos += (Gdx.graphics.getDeltaTime() % 0.25 < 1/50f) ? (pos == 1) ? -1 : 1 : 0;
 			break;
 		}
 	}

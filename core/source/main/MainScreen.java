@@ -93,39 +93,36 @@ public class MainScreen implements Screen {
 			
 			eManager.render();
 			tManager.render();
-			
 			UserInterface.render();
 			
 		batch.end();
 		
-		debugcam.render(world, cam.combined); ///////////////////////
+		//debugcam.render(world, cam.combined); ///////////////////////
 	}
 
 	@Override
 	public void hide () {
-		
+		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void dispose () {
-		
+		// TODO Auto-generated method stub
 	}
 	
 	@Override
 	public void resize (int width, int height) {
-		
+		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-		
 	}
 
 }

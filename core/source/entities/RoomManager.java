@@ -9,6 +9,7 @@ public class RoomManager {
 	
 	public Room[] rooms;
 	public int count;
+	public static int current = 1;
 	
 	//private boolean[][] coordinates;
 	private boolean[] tempC = {true, true, true, true};

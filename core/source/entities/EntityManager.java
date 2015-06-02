@@ -55,10 +55,10 @@ public class EntityManager {
 		int monsterID = 0;
 		for (int i = 0; i < 7; ++i) {
 			for (int j = 0; j < 13; ++j) {
-				if (!Assets.monsterMap[i][j]) {
+				if (!Assets.monsterMaps[RoomManager.current][i][j]) {
 					continue;
 				}
-				int monsterType = Assets.monsterMapS[i][j]-1;
+				int monsterType = Assets.monsterMapsS[RoomManager.current][i][j]-1;
 				currentRoom.addMonster(monsterType, Vars.y(i)+45, Vars.x(j)+45);
 				monsterSkins[i][j] = new Skin(currentRoom.monsters.get(monsterID).body, monsterType);
 				++monsterID;
