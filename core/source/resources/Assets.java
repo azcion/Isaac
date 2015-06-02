@@ -19,11 +19,8 @@ public class Assets {
 	private static Texture tDoorHole;
 	public static Sprite sDoorHole;
 	
-	public static boolean[][][] rockMaps;
-	public static int[][][] rockMapsS;
-	
-	public static boolean[][][] monsterMaps;
-	public static int[][][] monsterMapsS;
+	public static int[][][] rockMaps;
+	public static int[][][] monsterMaps;
 	
 	private static Texture tRock01;
 	public static Sprite[] sRock01;
@@ -120,16 +117,12 @@ public class Assets {
 			sUI_Hearts[i+4].flip(false, true);
 		}
 		
-		rockMaps = new boolean[maps][7][13];
-		rockMapsS = new int[maps][7][13];
-		monsterMaps = new boolean[maps][7][13];
-		monsterMapsS = new int[maps][7][13];
+		rockMaps = new int[maps][7][13];
+		monsterMaps = new int[maps][7][13];
 		
 		for (int i = 0; i < maps; ++i) {
-			generateRockMap(i, Gdx.files.local("txt/01_0" + i +"_R_bool.txt"));
-			generateRockMapS(i, Gdx.files.local("txt/01_0" + i +"_R_type.txt"));	
-			generateMonsterMap(i, Gdx.files.local("txt/01_0" + i +"_M_bool.txt"));
-			generateMonsterMapS(i, Gdx.files.local("txt/01_0" + i +"_M_type.txt"));
+			generateRockMap(i, Gdx.files.local("txt/01_0" + i +"_R_type.txt"));	
+			generateMonsterMap(i, Gdx.files.local("txt/01_0" + i +"_M_type.txt"));
 		}
 		
 	}
@@ -146,42 +139,11 @@ public class Assets {
 		for (int i = 0; i < 7; ++i) {
 			tiles[i] = lines[i].split(" ");
 			for (int j = 0; j < 13; ++j) {
-				rockMaps[map][i][j] = "1".equals(tiles[i][j]);
+				String s = tiles[i][j];
+				rockMaps[map][i][j] = (s.equals(".")) ? -1 : Integer.parseInt(s);;
 			}
 		}
 	}
-	
-	public static void generateRockMapS (int map, FileHandle file) throws IOException {
-		String[] lines = file.readString().split("\\r?\\n");
-		String[][] tiles = new String[7][13];
-		
-		for (int i = 0; i < 7; ++i) {
-			tiles[i] = lines[i].split(" ");
-			for (int j = 0; j < 13; ++j) {
-				if (rockMaps[map][i][j]) {
-					rockMapsS[map][i][j] = Integer.valueOf(tiles[i][j]);
-				}
-			}
-		}
-	}
-	
-	/*public static void RgenerateRockMapS (boolean[][] rockMap) {
-		for (int i = 0; i < 7; ++i) {
-			for (int j = 0; j < 13; ++j) {
-				if (rockMap[i][j]) {
-					if (obstructed(i, j)) {
-						rockMap[i][j] = false;
-					}
-					switch (Vars.seed.nI(4)) {
-						case 0: rockMapS[i][j] = 0; break;
-						case 1: rockMapS[i][j] = 1; break;
-						case 2: rockMapS[i][j] = 2; break;
-						case 3: rockMapS[i][j] = (Vars.seed.nD() > 0.95) ? 4 : 3; break;
-					}
-				}
-			}
-		}
-	}*/
 	
 	public static void generateMonsterMap (int map, FileHandle file) throws IOException {
 		String[] lines = file.readString().split("\\r?\\n");
@@ -190,21 +152,8 @@ public class Assets {
 		for (int i = 0; i < 7; ++i) {
 			tiles[i] = lines[i].split(" ");
 			for (int j = 0; j < 13; ++j) {
-				monsterMaps[map][i][j] = "1".equals(tiles[i][j]);
-			}
-		}
-	}
-	
-	public static void generateMonsterMapS (int map, FileHandle file) throws IOException {
-		String[] lines = file.readString().split("\\r?\\n");
-		String[][] tiles = new String[7][13];
-		
-		for (int i = 0; i < 7; ++i) {
-			tiles[i] = lines[i].split(" ");
-			for (int j = 0; j < 13; ++j) {
-				if (monsterMaps[map][i][j]) {
-					monsterMapsS[map][i][j] = Integer.valueOf(tiles[i][j]);
-				}
+				String s = tiles[i][j];
+				monsterMaps[map][i][j] = (s.equals(".")) ? -1 : Integer.parseInt(s);
 			}
 		}
 	}

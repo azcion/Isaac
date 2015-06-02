@@ -67,8 +67,8 @@ public class Skin {
 		Sprite rock = null;
 		for (int i = 0; i < 7; ++i) {
 			for (int j = 0; j < 13; ++j) {
-				if (Assets.rockMaps[RoomManager.current][i][j]) {
-					switch (Assets.rockMapsS[RoomManager.current][i][j]) {
+				if (Assets.rockMaps[RoomManager.current][i][j] != -1) {
+					switch (Assets.rockMaps[RoomManager.current][i][j]) {
 						case 0: rock = Assets.sRock01[0]; break;
 						case 1: rock = Assets.sRock01[1]; break;
 						case 2: rock = Assets.sRock01[2]; break;
