@@ -33,7 +33,7 @@ public class TearManager {
 		tears = new Array<>();
 		bodies = new Array<>();
 		skins = new Array<>();
-		
+
 		tearsPending = new Array<>();
 		bodiesPending = new Array<>();
 		skinsPending = new Array<>();
