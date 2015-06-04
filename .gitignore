@@ -22,7 +22,8 @@ android/libs/armeabi/
 android/libs/armeabi-v7a/
 android/libs/x86/
 android/gen/
-.idea/
+.idea/workspace.xml
+.idea/tasks.xml
 *.ipr
 *.iws
 *.iml
