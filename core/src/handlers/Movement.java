@@ -3,6 +3,7 @@ package handlers;
 import main.MainScreen;
 import resources.Vars;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 import entities.DynamicBody;
@@ -22,7 +23,7 @@ public class Movement {
 
 		// exit
 		if (Controls.isDown(Controls.ESC)) {
-			System.exit(1);
+			Gdx.app.exit();
 		}
 		
 		// moving
